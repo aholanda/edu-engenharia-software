@@ -1,0 +1,177 @@
+\lecture{Levantamento e Análise de Requisitos}{requirements}
+
+\lecturetitle{\course}{\insertlecture}
+
+\section{\insertlecture}
+
+\frame{\maketitle}
+
+\begin{frame}{\insertlecture}
+  
+  \begin{itemize}[<+->]\setbeamercovered{transparent}
+  \item O software deve se adaptar às necessidades dos usuários;
+    \begin{itemize}
+    \item As melhores técnicas de programação---algoritmos, estrutura de dados, 
+      análise de performance, estrutura modular---não salvarão o projeto da falha.
+    \end{itemize}
+  \item Os softwares são construídos para atender os clientes, em especial os usuários, 
+    e devem se adaptar às suas necessidades.
+  \end{itemize}
+
+  \pause
+  
+  O levantamento e análise de requisitos tenta atingir um equilíbrio
+  entre o que os usuários querem e o que o sistema fará.
+  \note{Equilíbrio porque alguma negociação deve haver.}
+
+\end{frame}
+
+\begin{frame}{Produtos da fase requisitos}
+  \begin{description}[<+->]\setbeamercovered{transparent}
+  \item[Documento de requisitos] descrevendo as características do
+    software a ser construído.
+  \item[Plano de validação] descrevendo como o futuro software, uma
+    vez construído, será testado.
+  \end{description}
+\end{frame}
+
+\begin{frame}{O Padrão IEEE}
+  \begin{itemize}
+  \item
+    \href{http://holanda.xyz/files/720574.pdf}{Prática
+      Recomendada para as Especificações de Requisitos de
+      Software. IEEE Computer Society. IEEE Std 830-1998.}
+
+    \begin{itemize}
+    \item Conjunto de listas para checagem de propriedades que o sistema
+      deve satisfazer.
+    \end{itemize}
+    \note{O padrão ajuda a levantar as propriedades, tentando antecipar
+      problemas que poderiam ocorrer.}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Escopo dos Requisitos}
+  \begin{description}[<+->]\setbeamercovered{transparent}
+  \item[Requisitos Funcionais] definem as funções que o sistema deve
+    possuir. Possuem entrada, processamento e saída.
+  \item[Requisitos Não-Funcionais] performance, portabilidade, éticos,
+    legais, integração.
+  \end{description}
+\end{frame}
+
+\begin{frame}{Obtendo os Requisitos}
+  
+  A obtenção dos requisitos é uma {\bf negociação} entre as propriedades
+  desejadas pelo usuário para o sistema e as possibilidades de
+  desenvolvimento e custos expostas pela equipe técnica.
+
+  \pause
+
+  \begin{block}{Principais fatores a serem equilibrados}
+  \begin{itemize}[<+->]\setbeamercovered{transparent}
+  \item Alguns usuários têm visões conflitantes sobre o sistema;
+  \item Algumas propriedades desejadas são inviáveis em termos de custo ou 
+    desenvolvimento;
+  \item Os usuários tendem a pensar em termos de sistemas existentes;
+  \item Fatores externos afetam a escolha das funcionalidades,
+    principalmente, custo e interferência da instituição onde o
+    sistema será implantado.
+  \end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Técnicas para levantamento de requisitos}
+  \begin{itemize}[<+->]\setbeamercovered{transparent}
+  \item Entrevistas;
+  \item Workshops;
+  \item Sistemas anteriores;
+  \item Sistemas similares.
+  \end{itemize}
+\end{frame}
+
+\frame{\author{}\date{}\title{Documentação de requisitos}\maketitle}
+
+\subsection{Documentação de requisitos}
+
+\begin{frame}{Documentação dos requisitos}
+  Formas de escrever uma especificação de requisitos do sistema:
+
+  \begin{description}[<+->]\setbeamercovered{transparent}
+  \item[Sentenças em linguagem natural:] Os requisitos são escritos em forma de frases.
+  \item[Linguagem natural estruturada:] Os requisitos são escritos em um formulário.
+    \item[Notações gráficas:] Utiliza figuras e diagramas com texto associado.
+  \item[Especificações matemáticas:] Usa notações matemáticas, como máquina de estados 
+    finitos e teoria de conjuntos.
+  \end{description}
+\end{frame}
+
+\begin{frame}{Sentenças em linguagem natural}
+  Exemplo de requisitos funcionais de um sistema de gestão de pessoas, disciplinas e notas 
+  de uma Faculdade ou Universidade:
+  \begin{enumerate}
+  \item Cadastro de pessoas por funcionários da Faculdade.
+    \item Consulta de pessoas por funcionários da Faculdade.
+    \item Cadastro de disciplinas por funcionário da Faculdade. 
+    \item Inserção de notas por professores.
+    \item Consulta de notas por parte dos alunos.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Linguagem natural estruturada}
+
+  {\bf Sistema de gerenciamento para Faculdade ou Universidade}\\\bigskip
+
+  \begin{tabular}[h]{|l|l|}\hline
+    \bf Função: & Gerenciar dados de pessoas, disciplinas e notas.\\\hline
+    \bf Descrição: & O sistema deve armazenar os dados de funcionários, \\
+    & alunos e docentes, de disciplinas e de notas.\\\hline
+    \bf Entradas: & Pessoas: nome, endereço, RG, CPF.\\
+                & Disciplinas: nome, responsável, resumo.\\
+                & Notas: nome da disciplina, nome do aluno, valor.\\\hline
+    \bf Saídas: & Visualização das entradas.\\\hline
+    
+  \end{tabular}
+\end{frame}
+
+\begin{frame}{Notação gráfica}
+  
+  Exemplo de uso de notação gráfica para a documentação de requisitos, no 
+  caso, diagrama de casos de uso da UML ({\em Unified Modeling Language}):
+
+  \begin{center}
+    \includegraphics[scale=.35]{usecase.png}
+  \end{center}
+
+\end{frame}
+
+\begin{frame}{Especificações matemáticas}
+  
+  Especificação do sistema de uma catraca usando máquina de estados finitos:\bigskip
+\begin{center}
+  \includegraphics[scale=.35]{state.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Especificações matemáticas, continuação}
+
+  Especificação de um relógio binário usando a lógica temporal de ações (TLA$^+$, \href{http://research.microsoft.com/en-us/um/people/lamport/tla/tla.html}{\em Temporal Logic of Actions}):
+
+\begin{multline}
+  \text{VARIABLE clock}\hfill\\
+  \text{Init} \equiv clock \in \{0, 1\}\hfill\\
+  \text{Tick} \equiv \text{IF}\ clock = 0\ \text{THEN}\ clock' = 1\ \text{ELSE}\ clock' = 0\hfill\\
+  \text{Spec} \equiv \text{Init} \land [][\text{Tick}]_{\langle clock\rangle}\hfill
+\end{multline}
+
+\end{frame}
+
+\begin{frame}{Referências}  
+  \begin{enumerate}
+  \item \ianref
+  \item \pfref
+  \item Bertrand Meyer, ``Touch of Class: Learning to Program Well
+    with Objects and Contracts'', Springer, 2009.
+  \end{enumerate}
+\end{frame}

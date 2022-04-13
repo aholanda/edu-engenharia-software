@@ -1,0 +1,18 @@
+= Engenharia de Software
+Adriano J. Holanda
+:toc: left
+:toclevels: 4
+:source-highlighter: pygments
+:figure-caption: Figura
+:toc-title: Sumário
+:imgdir: img
+:srcdir: src
+:githubLnk: https://raw.githubusercontent.com/ajholanda/edu-softeng/master
+
+include::intro.adoc[]
+
+include::vcs.adoc[]
+
+include::config.adoc[]
+
+

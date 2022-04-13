@@ -1,0 +1,127 @@
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 
+
+\title{UML}
+
+\frame{\includegraphics{img/uml.png}\maketitle}
+
+\begin{frame}{UML}{Introdução}
+  
+  \begin{itemize}
+  \item UML - {\it Unified Modeling Language} -- Linguagem Unificada
+    de Modelagem.\pause
+  \item Adquiriu maturidade na segunda década de 1990 pela fusão dos
+    métodos e diagramas de
+    \href{https://en.wikipedia.org/wiki/Grady_Booch}{Grady Booch}, 
+    \href{https://en.wikipedia.org/wiki/Ivar_Jacobson}{Ivar H. Jacobson} e
+    \href{https://en.wikipedia.org/wiki/James_Rumbaugh}{James E. Rumbaugh}.\pause
+  \item Incorporada pela \href{http://www.ibm.com/software/rational}{Rational} 
+    Software, comprada pela IBM.\pause
+  \item Em 1997, foi adotada como padrão pela
+    \href{http://www.omg.org/}{OMG}~({\it Object Management Group}).\pause
+  \item Em 2005, foi publicada pela
+    \href{http://www.iso.org/iso/home.html}{ISO}~({\it International
+      Organization for Standardization}).
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{UML}{Termos e conceitos}
+  \begin{description}
+  \item[Sistema:] coleção de subsistemas organizados para a realização
+    de um objetivo.\pause
+  \item[Subsistema] agrupamento de elementos, alguns dos quais
+    constituem uma especificação do comportamento.\pause
+  \item[Modelo:] abstração semanticamente fechada de um sistema.\pause
+  \item[Visão:] projeção da organização e estrutura de um modelo de um
+    sistema.
+  \end{description}
+
+\end{frame}
+
+\begin{frame}{UML}{Diagramas: parte estática}
+  A \alert{estrutura (parte estática)} de um sistema tipicamente pode ser
+  visualizada pela utilização dos seguintes diagramas:
+
+  \begin{description}
+  \item[Classes:] classes, interfaces, colaborações e seus relacionamentos.\pause
+  \item[Objetos:] conjunto de objetos e seus relacionamentos.\pause
+  \item[Componentes:] conjunto de componentes e seus relacionamentos.\pause
+  \item[Pacotes:] descreve as dependências entre os pacotes que formam um modelo.\pause
+  \item[Implantação:] conjunto de nós e seus componentes.
+  \end{description}
+
+\end{frame}
+
+\begin{frame}{UML}{Diagramas: parte dinâmica}
+  O \alert{comportamento (parte dinâmica)} de um sistema tipicamente pode ser
+  visualizada pela utilização dos diagramas a seguir:
+
+  \begin{description}
+  \item[Caso de uso:] organiza os comportamentos do sistema.\pause
+  \item[Sequência:] tem como foco a ordem temporal das mensagens.\pause
+  \item[Colaboração:] tem como foco a organização estrutural de objetos que enviam 
+    e recebem mensagens.\pause
+  \item[Gráfico de estados:] Focaliza o estado de mudança de um
+    sistema orientado por eventos.\pause
+  \item[Atividades:] Focaliza o fluxo de controle de um atividade para outra.\pause
+  \item[Comunicação:] na UML 2.0, é a versão simplificada do diagrama de 
+    colaboração da UML 1.x.
+  \end{description}
+
+\end{frame}
+
+\begin{frame}{Regras da UML}
+  
+  A UML dispõe de regras semânticas para a construção de modelos
+  \alert{bem-formados}, que são auto-consistentes semanticamente e em
+  harmonia com todos os modelos a eles relacionados. A UML dispõe de
+  regras para:
+
+  \begin{description}
+  \item[Nomes:] quais nomes podem ser atribuídos a coisas,
+    relacionamentos e diagramas.\pause
+  \item[Escopo:] o contexto que determina um significado específico
+    para um nome.\pause
+  \item[Visibilidade:] como esses nomes podem ser vistos utilizados 
+    pelos outros.\pause
+  \item[Integridade] como os itens se relacionam entre si de forma 
+    adequada e consistente.\pause
+  \item[Execução:] o que significa executar ou simular um modelo
+    dinâmico.
+  \end{description}
+  
+\end{frame}
+
+\begin{frame}{Arquitetura}
+  
+  A arquitetura é o conjunto de decisões significativas acerca dos
+  seguintes itens:
+
+  \begin{itemize}
+  \item A organização do sistema de software.\pause
+  \item A seleção dos elementos estruturais e suas interfaces, que
+    compõe o sistema.\pause
+  \item Seu comportamento, conforme especificado nas colaborações 
+    entre esses elementos.\pause
+  \item A composição desses elementos estruturais e comportamentais 
+    em subsistemas progressivamente maiores.\pause
+  \item O estilo de arquitetura que orienta a organização: os elementos 
+    estáticos e dinâmicos e suas respectivas interfaces, colaborações 
+    e composições.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Referência}
+  \begin{thebibliography} {Rumbaugh, 1998}
+
+  \bibitem[Rumbaugh, 1998]{rumbaugh1998}
+    James Rumbaugh, Ivar Jacobson, Grady Booch.
+    \newblock 	   {\em The Unified Modeling Language User Guide}.
+    \newblock	   Addison-Wesley, 1998.
+
+  \end{thebibliography}
+\end{frame}

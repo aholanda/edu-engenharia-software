@@ -1,0 +1,97 @@
+
+% EXTRACT CLASS
+\exercise~Faça o {\em refactoring} da classe a seguir descrevendo o
+nome de acordo com o catálogo e justificando sua decisão.
+
+\begin{center}
+\begin{tikzpicture}
+  \umlclass{Empresa}{ 
+    -- name : String \\ -- cnpj : uint \\
+    -- endereco : String \\ -- enderecoCep : int \\
+    -- enderecoCidade: String \\ -- enderecoEstado : String 
+}{ 
+    + getEndereco() :  String
+} 
+\end{tikzpicture}
+\end{center}
+
+\exercise~As classes das hierarquias a seguir necessitam de {\em refactoring}
+descrevam o motivo e o nome do {\em refactoring} aplicado;
+
+\begin{enumerate}[a)]
+\item
+\begin{center}
+  \begin{tikzpicture}
+    \umlsimpleclass{InstrumentoMusical}
+    \umlclass[x=-2,y=-3]{Viola}{-- ncordas : int}{}
+    \umlclass[x=2,y=-3]{Guitarra}{-- ncordas : int}{}
+    \umlVHVinherit{Viola}{InstrumentoMusical}
+    \umlVHVinherit{Guitarra}{InstrumentoMusical}
+  \end{tikzpicture}
+\end{center}\bigskip
+
+\item
+\begin{center}
+  \begin{tikzpicture}
+    \umlclass{InstrumentoMusical}{-- ncordas : int}{}
+    \umlsimpleclass[x=-3,y=-3]{Viola}
+    \umlsimpleclass[x=0,y=-3]{Guitarra}
+    \umlsimpleclass[x=3,y=-3]{Saxofone}
+    \umlVHVinherit{Viola}{InstrumentoMusical}
+    \umlVHVinherit{Guitarra}{InstrumentoMusical}
+    \umlVHVinherit{Saxofone}{InstrumentoMusical}
+  \end{tikzpicture}
+\end{center}
+
+\end{enumerate}
+
+
+\question{1,5}~Faça o {\em refactoring} da classe a seguir descrevendo o
+nome de acordo com o catálogo e justificando sua decisão.
+
+\begin{center}
+\begin{tikzpicture}
+  \umlclass{Funcionario}{ 
+    -- name : String \\ -- cnpj : uint \\
+    -- endereco : String \\
+    -- nomeBanco: String \\
+    -- numeroBanco: uint \\
+    -- numeroAgenciaBanco: uint\\
+    -- numeroContaBanco: uint\\
+}{ 
+    + getInfoBanco() :  String
+} 
+\end{tikzpicture}
+\end{center}
+
+\question{2,0}~As classes das hierarquias a seguir necessitam de {\em refactoring}
+descrevam o motivo e o nome do {\em refactoring} aplicado;
+
+\begin{enumerate}[a)]
+\item
+\begin{center}
+  \begin{tikzpicture}
+    \umlsimpleclass{Construcao}
+    \umlclass[x=-2,y=-3]{Casa}{-- endereco : String}{}
+    \umlclass[x=2,y=-3]{Predio}{-- endereco : String}{}
+    \umlclass[x=2,y=-3]{Deposito}{-- endereco : String}{}
+    \umlVHVinherit{Casa}{Construcao}
+    \umlVHVinherit{Predio}{Construcao}
+    \umlVHVinherit{Deposito}{Construcao}
+  \end{tikzpicture}
+\end{center}\bigskip
+
+\item
+\begin{center}
+  \begin{tikzpicture}
+    \umlclass{Construcao}{-- numeroApartamentos : uint}{}
+    \umlsimpleclass[x=-3,y=-3]{Casa}
+    \umlsimpleclass[x=0,y=-3]{Predio}
+    \umlsimpleclass[x=3,y=-3]{Deposito}
+    \umlVHVinherit{Casa}{Construcao}
+    \umlVHVinherit{Predio}{Construcao}
+    \umlVHVinherit{Deposito}{Construcao}
+  \end{tikzpicture}
+\end{center}
+
+\end{enumerate}

@@ -1,0 +1,13 @@
+notes.org
+
+# java
+*.class
+
+# emacs
+.\#*
+
+# java, netbeans
+/build/
+
+# astah
+*.bak

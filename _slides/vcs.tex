@@ -1,0 +1,96 @@
+\lecturetitle{Sistema de Controle de Versão}{\course}
+
+\frame{\maketitle}
+
+\begin{frame}{Sistema de Controle de Versão}{Vantagens}
+\begin{itemize}[<+-| alert@+>]
+\item Permite mais de um desenvolvedor trabalhar no mesmo código;
+\item Versões mais antigas são facilmente recuperáveis;
+\item Mantém registro das modificações;
+\item Permite comparação das diferenças entre as versões;
+\item Permite ramificações ({\em branches}) e versões múltiplas 
+      do mesmo projeto.
+\end{itemize}
+\end{frame}
+
+\tikzset{object/.style={rounded rectangle,draw}
+         ,version/.style={object,minimum width=2.5cm,fill=green!77!black}
+         ,file/.style={object,minimum width=2cm,fill=blue!30}
+         ,scmNode/.style={fill=gray!50,draw}
+         ,computer/.style={scmNode,minimum width=3.5cm,minimum height=2cm}
+         ,server/.style={scmNode,minimum width=3.5cm,minimum height=5cm}
+}      
+\newcommand\versionDatabase[1]{
+        \node[minimum height=3.25cm,minimum width=2.5cm,fill=white,draw] (#1VersionDatabase) at (#1) {};
+        \node[version] (#1Version2) at (#1) {Versão 2};
+        \node[version] (#1Version1) [below of=#1Version2] {Versão 1};
+        \node[version] (#1Version3) [above of=#1Version2] {Versão 3};
+        \path[draw] (#1Version3) -- (#1Version2);
+        \path[draw] (#1Version2) -- (#1Version1);
+}
+\begin{frame}{Sistema de Controle de Versão Centralizado}
+
+Exemplos: \href{https://subversion.apache.org/}{Subversion}, 
+ \href{http://www.nongnu.org/cvs/}{CVS}, 
+\href{http://bazaar.canonical.com/en/}{Bazaar}, 
+
+\begin{center}
+\begin{tikzpicture}
+\node[server] (Server) {};
+\node[below]  (ServerLabel) at (Server.north) {Servidor};
+
+\versionDatabase{Server}
+
+\node[computer] [left of=Server,xshift=-3cm,yshift=1.15cm] (ComputerA) {};
+\node[below] at (ComputerA.north) {Computador A};
+\node[file] (FileA) at (ComputerA) {Arquivo};
+\node[computer] (ComputerB) [below of=ComputerA,yshift=-1.5cm] {};  
+\node[below] at (ComputerB.north) {Computador B};
+\node[file] (FileB) at (ComputerB) {Arquivo};
+\path[->,draw] (ServerVersionDatabase) -> (FileA);
+\path[->,draw] (ServerVersionDatabase) -> (FileB);
+\end{tikzpicture}
+\end{center}
+\tiny Fonte: Vídeo do youtube: \href{https://www.youtube.com/watch?v=ZDR433b0HJY}{``Introduction to Git with Scott Chacon of GitHub.''}
+
+\end{frame}
+
+\begin{frame}{Sistema de Controle de Versão Distribuído}
+Exemplos: \href{http://gitscm.org/}{Git},
+          \href{https://www.mercurial-scm.org/}{Mercurial},
+          
+\begin{center}
+\begin{tikzpicture}[distributed/.style={minimum height=5cm}]
+
+\node[server] (Server) {};
+\node[below]  (ServerLabel) at (Server.north) {Servidor};
+\versionDatabase{Server}
+
+\node[computer,distributed] [left of=Server,xshift=-3cm,yshift=-.5cm] (ComputerA) {};
+\node[below] at (ComputerA.north) {Computador A};
+\versionDatabase{ComputerA}
+\node[file] (FileA) [below of=ComputerAVersion1] {Arquivo};
+
+\node[computer,distributed] (ComputerB) [right of=Server,xshift=3cm,yshift=-0.5cm] {};  
+\node[below] at (ComputerB.north) {Computador B};
+\versionDatabase{ComputerB}
+\node[file] (FileB)  [below of=ComputerBVersion1] {Arquivo};
+
+\path[>=latex,<->,draw] (Server) -> (ComputerA);
+\path[>=latex,<->,draw] (Server) -> (ComputerB);
+\end{tikzpicture}
+\end{center}
+\tiny Fonte: Vídeo do youtube: \href{https://www.youtube.com/watch?v=ZDR433b0HJY}{``Introduction to Git with Scott Chacon of GitHub.''}
+\end{frame}
+
+\begin{frame}{Sistema de Controle de Versão Distribuído}{Vantagens}
+\begin{itemize}[<+-| alert@+>]
+\item Cada desenvolvedor pode ter sua cópia do projeto de software.
+\item Não sobrecarrega a rede a cada alteração e consolidação do 
+código modificado.
+\item As ramificações ({\em branches}) são locais e podem ser 
+ fundidas com o repositório central.
+\item Os desenvolvedores podem compartilhar código entre si 
+antes de transferir para o repositório central.
+\end{itemize}
+\end{frame}

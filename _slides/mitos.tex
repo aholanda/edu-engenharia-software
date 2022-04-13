@@ -1,0 +1,116 @@
+% Fonte: http://users.csc.calpoly.edu/~jdalbey/205/Lectures/myths.html
+
+\lecture{Mitos de Desenvolvimento de Software}{myths}
+
+\lecturetitle{\course}{\insertlecture}
+
+\section*{\insertlecture}
+
+\frame{\maketitle}
+
+\begin{frame}{Mítico Homêm-Mês}
+\footnotesize
+  \begin{columns}
+    \begin{column}{.4\textwidth}
+      \includegraphics[scale=.35]{img/mitico.png}
+    \end{column}
+    \begin{column}{.6\textwidth}
+      \begin{itemize}
+      \item Observações do autor sobre a experiência de desenvolvimento 
+        do sistema operacional OS/360 (1964--*) na IBM.
+      \item 1$^a$ publicação: 1975.
+      \end{itemize}
+    \end{column}
+
+  \end{columns}
+  
+\end{frame}
+
+\begin{frame}{\inserttitle}
+
+Os mitos são classificados de acordo com o ponto de vista de quem 
+os emprega em mitos de:
+
+  \begin{enumerate}[<+-| alert@+>]
+  \item Gerenciamento;
+  \item Desenvolvimento;
+  \item Desenvolvedor.
+  \end{enumerate}
+
+\end{frame}
+
+\note{A seguir são descritos alguns mitos que normalmente conduzem à
+produção de software com defeitos, atraso na entrega ou cancelamento
+do projeto. Os mitos foram classificados de acordo com o ponto de
+vista de quem os emprega.}
+
+\begin{frame}{Mitos de Gerenciamento}
+\small
+\begin{description}[<+-| alert@+>]
+\item[Normas e padrões] Normas são editadas por empresas e comitês, às
+  vezes são úteis. Porém, podem se tornar irrelevantes, incompletas e
+  incompreensíveis se não estiverem vinculadas à realidade.
+\item[Ferramentas] Ferramentas podem ajudar, porém não fazem mágica. A
+  solução de problemas requerem mais que ferramentas, requerem um
+  profundo entendimento do problema e da solução. Segundo Fred
+  Brooks~\cite{brooks1975}, não há ``bala de prata'' no
+  desenvolvimento de software.
+\item[Mais programadores:] A solução intuitiva de que adicionando mais
+  programadores pode fazer com que um projeto cumpra seu prazo é
+  completamente errônea. Este procedimento causa sobrecarga de
+  comunicação e atraso devido ao tempo que os novos integrantes da
+  equipe leva para entender o problemas e solução. Segundo Fred
+  Brooks~\cite{brooks1975}, ``adicionando pessoas a um projeto
+  atrasado torna-o mais atrasado''.
+\end{description}
+
+\end{frame}
+
+\begin{frame}{Mitos de Desenvolvimento}
+
+\begin{description}[<+-| alert@+>]
+\item[Alterações são fáceis:] Alterações em um software não são
+  facilmente acomodadas como a princípio parecem ser. As alterações
+  podem tornar o software mais complexo, introduzir novos erros e
+  exigir uma quantidade enorme de trabalho devido às modificações em
+  todos os processos relacionados (teste, documentação, $\ldots$).
+
+\item[Visão superficial:] {\bf Uma visão geral da solução é suficiente
+    para começar a programar.} É necessário um visão concreta sobre os
+  requisitos, para detalhar os problemas e soluções para dar início ao
+  desenvolvimento.
+\end{description}
+
+\end{frame}
+
+\begin{frame}{Mitos do Desenvolvedor}
+
+\begin{itemize}[<+-| alert@+>]
+\item {\bf O trabalho acaba quando o programa é entregue:} O software requer
+  atenção após a entrega, a manutenção, aperfeiçoamento e extensões
+  geram uma necessidade contínua de suporte.
+\item {\bf O sucesso de um projeto depende somente da qualidade do software
+  entregue:} Documentação e informações de configuração são
+  extremamente importantes.
+\item {\bf Não há como avaliar a qualidade de um software até que ele
+  esteja executando:} Devido a natureza abstrata do software, ele pode
+  ser avaliado sem que uma linha de código seja produzida. Há métodos
+  formais de análise para verificação de pontos críticos com relação à
+  corretude, segurança e confiabilidade.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Referências}
+\bibliographystyle{plain}
+\bibliography{software-engineering}
+\end{frame}
+
+
+%%
+% Local variables:
+% mode: latex
+% mode:auto-fill
+% TeX-file: main
+% End:
+%%

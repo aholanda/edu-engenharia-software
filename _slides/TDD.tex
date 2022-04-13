@@ -1,0 +1,123 @@
+%% FUTURE: http://ix.cs.uoregon.edu/~michal/book/slides/pdf/PezzeYoung-Ch05-FiniteModels.pdf
+
+\lecture{Desenvolvimento baseado em testes}{tests}
+\lecturetitle{\insertlecture}{\course}
+\maketitle
+
+\begin{frame}{Testes}{TDD}\small
+  Os testes são importantes nas abordagens Ágeis que seguem o
+  desenvolvimento baseado em testes (Test-Driven Development--TDD)
+  e segue os seguintes passos:
+  \begin{itemize}[<+-| alert@+>]\setbeamercovered{transparent}
+  \item A partir das histórias do usuário elaborar testes de unidade
+    que falham para testar o código não existente;
+  \item Escreva somente o código suficiente para passar no teste
+    e procure oportunidades para refatorar ({\em refactoring}), esta
+    sequência é chamada vermelho--verde--refatoramento;
+  \item Use {\em mocks} e {\em stubs} nos testes para isolar o
+    comportamento do código testado do comportamento de outras classes
+    ou métodos que dependem deles;
+  \item Vários testes de cobertura de código podem ser usados para
+    verificar que partes do código ainda precisam ser testadas.
+  \item Os testes param quando um nível de cobertura á alcançado, por
+    exemplo, 95\%.
+  \end{itemize}  
+\end{frame}
+
+\begin{frame}{Testes}{TDD}\small
+
+  \begin{quote}
+    ``O teste do programa pode ser uma maneira muito efetiva de mostrar
+    a presença de {\em bugs}, mas irremediavelmente inadequado para
+    mostrar a ausências destes.'' Edsger W. Dijkstra
+  \end{quote}
+  
+  \begin{itemize}[<+-| alert@+>]\setbeamercovered{transparent}
+  \item As metologias tradicionais também possuem os mesmos conceitos,
+    porém, em uma ordem diferente e executado por pessoas diferentes.
+  \item Uma alternativa aos testes é o uso de métodos formais. Eles
+    usam especificações formais do comportamento correto do programa
+    que são verificadas por provadores automáticos de teoremas ou
+    por buscas exaustivas dos estados possíveis, ambos vão além do que
+    os testes podem fazer.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{Propriedades dos Testes}
+
+  As propriedades desejável do teste são:
+  
+  \begin{description}[<+-| alert@+>]\setbeamercovered{transparent}
+  \item[Rapidez:] ele deve ser simples e rápido para não interferir
+    no fluxo de raciocínio;
+  \item[Independente:] Nenhum teste deve depender em condições
+    criadas por outros testes;
+  \item[Reprodutível:] o teste não deve depender de fatores externos
+    como a data do dia ou ``constantes mágicas'';
+  \item[Automático:] o teste deve determinar por si próprio se passou
+    ou falhou sem interferência humana;
+  \item[Atualizado:] O código deve ser criado e atualizado ao mesmo
+    tempo que o código que está testando.
+  \end{description}
+  
+\end{frame}
+
+\begin{frame}{Testes de Unidade}
+
+\begin{itemize}[<+-| alert@+>]
+\item Testes são uma forma antiga de assegurar que algumas alterações 
+no código não tenham modificado a saída esperada para determinadas
+funcionalidades.
+\item O {\bf Teste de Unidade} ({\em Unit Testing}) foi definido para 
+ser parte integrante da metodologia ágil {\em Extreme Programming}
+(XP), com o objetivo de verificar se as unidades selecionadas para
+teste, sejam elas módulos, classes ou métodos, retornam os resultados
+esperados após alteração no código. Caso contrário, a construção do
+software irá falhar, indicando que houve inserção de {\em bug}.
+\end{itemize}
+
+\end{frame}
+
+\lstset{language=java,basicstyle=\scriptsize}
+\begin{frame}[fragile]{Exemplo de Teste usando JUnit}
+
+\lstinputlisting{Calculadora.java}
+
+\tiny
+Para compilar: {\tt \$ javac Calculadora.java}
+
+\end{frame}
+
+\begin{frame}[fragile]{Exemplo de Teste usando JUnit, cont.}
+
+\lstinputlisting{TesteCalculadora.java}
+
+\tiny
+Para compilar:{\tt \$ javac -cp .:junit-4.12.jar TesteCalculadora.java Calculadora.java}\\
+Para executar: {\tt \$ java -cp .:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore TesteCalculadora}
+\end{frame}
+
+
+\begin{frame}{Exercício}
+
+  Escreva testes para os seguintes métodos:
+  \begin{description}
+  \item[mul(int x, int y)] - retorna o valor da multiplicação entre {\tt x} e {\tt y}
+  \item[dif(int x, int y)] - retorna o valor da diferença entre {\tt x} e {\tt y};  
+  \item[max(int x, int y)] - retorna o maior valor entre {\tt x} e {\tt y};
+  \item[min(int x, int y)] - retorna o menor valor entre {\tt x} e {\tt y};
+  \item[media(List xs)] - retorna a média do valores na lista {\tt xs}.
+  \end{description}
+  
+\end{frame}
+
+\begin{frame}{Referência}
+  \begin{thebibliography}{10}
+    \beamertemplatebookbibitems
+  \bibitem[Fox and Patterson, 2015]{fox2015}
+    Armando Fox and David Patterson.
+    \newblock ``Construindo Software como Serviço (SaaS): Uma Abordagem Ágil Usando Computação em Nuvem ''.
+  \newblock Strawberry Canyon LLC, 2015.
+  \end{thebibliography}
+\end{frame}

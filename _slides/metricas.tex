@@ -1,0 +1,175 @@
+\lecture{Métricas}{metrics}
+
+\lecturetitle{\insertlecture}{\course}
+
+\frame{\maketitle}
+
+\section{\insertlecture}
+
+
+\begin{frame}{Algumas Métricas}
+  \scriptsize
+  Medidas que podem ser usadas para monitoramento e controle 
+  do processo de desenvolvimento.
+
+  \begin{itemize}[<+-| alert@+>]\setbeamercovered{transparent}
+  \item {\bf Número de linhas de código}
+  \item {\bf Extensão ({\it coverage}) do código}
+  \item {\bf Análise de pontos por função}
+  \item {\bf Densidade de defeitos do módulo} {\it bugs\/} pelo tamanho do módulo.
+  \item {\bf Refugo do sistema} tempo dispendido no reparo de falhas pelo tempo 
+    total de desenvolvimento.
+  \item {\bf Estabilidade dos requisitos} número de requisitos no levantamento pelo 
+    número de requisitos na fase final do projeto.
+  \item {\bf Defeitos no teste} número de defeitos durante a fase de testes.
+  \item $\ldots$
+  \end{itemize}
+\end{frame}
+
+\subsection{Linhas de Código--SLOC}
+
+\begin{frame}{Número de Linhas de Código}{SLOC}
+\begin{itemize}[<+-| alert@+>]\setbeamercovered{transparent}
+\item O {\bf número de linhas de código} (SLOC--{\em Source Lines of
+    Code}) é uma métrica usada para saber o tamanho do software pela
+  contagem do número de linhas de código fonte.
+\item Tenta quantificar o esforço de produção, produtividade e
+  manutenibilidade.
+\item Umas das métricas mais antigas.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Exemplo SLOC}\scriptsize
+
+\begin{center}
+\begin{tabular}{l|l|l}
+\bf\hfil Ano &\bf\hfil	Sistema &\bf\hfil SLOC (milhões) \\\hline
+1993&	Windows NT 3.1&	4--5\\
+1994&	Windows NT 3.5&	7--8\\
+1996&	Windows NT 4.0&	11--12\\
+2000&	Windows 2000&	> 29\\
+2001&	Windows XP&	45\\
+2003&	Windows Server 2003 &	50\\\hline
+\end{tabular}\\
+\end{center}
+{\scriptsize Fonte: \href{http://www.knowing.net/index.php/2005/12/06/how-many-lines-of-code-in-windows/}{``How Many Lines of Code in Windows?''}. Knowing .NET. }
+
+\pause\bigskip
+\begin{center}
+\begin{tabular}{l|l|l}\hline
+\bf\hfil Ano & \bf\hfil Sistema & SLOC (milhões) \\\hline
+  2001&	Linux kernel 2.4.2&	2,4\\
+  2003&	Linux kernel 2.6.0&	5,2\\
+  2009&	Linux kernel 2.6.29&	11,0\\
+  2009&	Linux kernel 2.6.32&	12,6\\
+  2010&	Linux kernel 2.6.35&	13,5\\
+  2012&	Linux kernel 3.6&	15,9\\
+  2015-06-30&	Linux kernel pre-4.2&	20,2\\\hline
+\end{tabular}\\
+\end{center}
+{\scriptsize Fonte: \href{https://en.wikipedia.org/wiki/Source_lines_of_code}{Wikipedia}}
+\end{frame}
+
+\begin{frame}[fragile]{SLOC}{Problemas}\scriptsize
+  \lstset{basicstyle=\scriptsize,numberstyle=\tiny,frame=single}
+  Cada linguagem possui uma expressividade diferente. Exemplo: 
+  comparação do algoritmo {\em quicksort} em C e Haskell.
+  \begin{center}
+      \begin{lstlisting}[language=C]
+        void quicksort (int *a, int n) {
+          int i, j, p, t;
+          if (n < 2)  return;
+          p = a[n / 2];
+          for (i = 0, j = n - 1;; i++, j--) {
+            while (a[i] < p) i++;
+            while (p < a[j]) j--;
+            if (i >= j) break;
+            t = a[i], a[i] = a[j], a[j] = t;
+          }
+          quicksort(a, i);
+          quicksort(a + i, n - i);
+        }
+      \end{lstlisting}\pause
+
+      \begin{lstlisting}[language=haskell]
+        import Data.List
+ 
+        qsort [] = []
+        qsort (x:xs) = qsort ys ++ x : qsort zs where (ys, zs) = partition (< x) xs
+      \end{lstlisting}
+    \end{center}
+  {\tiny Fonte: \href{https://rosettacode.org/wiki/Sorting_algorithms/Quicksort}{Rosetta Code}.}
+\end{frame}
+
+
+\begin{frame}[fragile]{SLOC}{Problemas}
+
+  Diferentes estilos de programação levam a diferentes resultados.
+
+  \lstset{basicstyle=\scriptsize,numberstyle=\tiny,frame=single}
+\begin{center}
+  \begin{lstlisting}[language=C]
+    for (i = 0, j = n - 1;; i++, j--) {
+      while (a[i] < p) i++;
+      while (p < a[j]) j--;
+      if (i >= j) break;
+      t = a[i], a[i] = a[j], a[j] = t;
+    }
+  \end{lstlisting}
+  
+  \begin{lstlisting}[language=C]
+    for (i = 0, j = n - 1;; i++, j--) 
+    {
+      while (a[i] < p) 
+         i++;
+      while (p < a[j]) 
+          j--;
+      if (i >= j) 
+          break;
+      t = a[i]; 
+      a[i] = a[j]; 
+      a[j] = t;
+    }
+  \end{lstlisting}
+\end{center}
+\end{frame}
+
+\begin{frame}{SLOC}{Vantagens}
+  
+  \begin{itemize}[<+-| alert@+>]\setbeamercovered{transparent}
+  \item Facilidade de automação;
+  \item Métrica intuitiva;
+  \item Facilidade de entendimento.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{SLOC}{Desvantagens}
+    \begin{itemize}[<+-| alert@+>]\setbeamercovered{transparent}
+  \item Falta de ligação com a funcionalidade;
+  \item Falta de normas para contagem;
+  \item Incentiva o aumento do código ao invés da melhoria;
+  \item Não leva em conta: linguagem de programação, experiência do programador, 
+    convenção de codificação.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Extensão ({\em coverage} do código)}\small
+  
+  Métrica de verficação da porcentagem de código executado em uma
+  suíte de testes, e pode ser classificada de acordo com o critério de
+  medição:
+
+  \begin{description}[<+-| alert@+>]\setbeamercovered{transparent}
+  \item[Função:] calcula a porcentagem de funções chamadas;
+  \item[Expressão:] calcula a porcentagem de expressões executadas;
+  \item[Desvios de fluxo:] calcula a porcentagem e verifica o caminho
+    feito pelas estruturas de controle;
+  \item[Condicional:] caminho coberto pelo fluxo de execução em
+    estruturas booleanas.
+  \end{description}
+
+  \pause\bigskip
+
+  O objetivo é quantificar a porcentagem de código não coberta pelos testes, 
+  em que pode haver existência de {\em bugs} que não serão avaliados.
+\end{frame}

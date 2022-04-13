@@ -1,0 +1,348 @@
+%% Local variables:
+% TeX-master: main
+% TeX-engine: lualatex
+%% End:
+
+\title{Diagrama de Classes\\UML ({\em Unified Modeling Language})}
+
+\frame{\maketitle}
+
+\begin{frame}[fragile]{Nome da Classe}
+
+  \begin{itemize}
+  \item  Nome da entidade a ser representada pela classe.
+  \end{itemize}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{class}{NomeClasse}{0,0}
+      
+      \end{class}
+    \end{tikzpicture}
+  \end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Atributos da Classe}{\only<1>{Conceitual}\only<2>{Especificação}}
+  \begin{itemize}
+  \item  Propriedades escolhidas para descrever a abstração da entidade.
+  \end{itemize}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \onslide<1> {
+        \begin{class}{Pessoa}{0,0}
+          \attribute{nome}
+          \attribute{endereco}
+          \attribute{fone}
+          \attribute{dataNascimento}
+        \end{class}
+      }
+
+      \onslide<2> {
+        \begin{class}{Pessoa}{0,0}
+          \attribute{nome : String}
+          \attribute{endereco : String}
+          \attribute{fone : String}
+          \attribute{dataNascimento : Date}
+        \end{class}
+      }
+    \end{tikzpicture}
+  \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Operações ou Métodos}{\only<1>{Conceitual}\only<2>{Especificação}}
+  \begin{itemize}
+  \item  Especificação de ações que modificam o estado da classe ou apenas realizam algum
+    procedimento.
+  \end{itemize}
+
+  \begin{center}
+    \begin{tikzpicture}
+
+      \onslide<1>{
+        \begin{class}{Quadrado}{0,0}
+          \operation{redimensionar()}
+          \operation{mover()}
+          \operation{preencher()}
+          \operation{comprimento()}
+        \end{class}
+      }
+
+      \onslide<2>{
+        \begin{class}[text width=8cm]{Quadrado}{0,0}
+          \operation{redimensionar(comprimento : Integer )}
+          \operation{mover(ponto : Point)}
+          \operation{preencher(cor: Color)}
+          \operation{comprimento() : Integer}
+        \end{class}
+      }
+                                  
+    \end{tikzpicture}
+  \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Interface}
+  \begin{itemize}
+  \item Não possui operações implementadas.
+  \end{itemize}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{interface}{IPessoa}{0,0}
+        \attribute{nome : String}
+        \attribute{sobrenome : String}
+        \attribute{dataNascimento : Date}
+        \operation{calcularIdade() : Integer}
+      \end{interface}
+    \end{tikzpicture}
+  \end{center}
+
+  \bigskip{A operação {\tt calcularIdade()} não possui implementação, serve como contrato de 
+    nomes de operações a serem implementadas.}
+
+\end{frame}
+
+\begin{frame}[fragile]{Classe Abstrata}
+  \begin{itemize}
+  \item Possui algumas operações implementadas.
+  \end{itemize}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{abstractclass}{ContaBancaria}{0,0}
+        \attribute{numero : Integer}
+        \attribute{correntista : String}
+        \attribute{saldo : Currency = 0}
+    
+        \operation{depositar(valor : Currency)}
+        \operation{\it calcularSaldo() : Currency}
+      \end{abstractclass}
+    \end{tikzpicture}
+  \end{center}
+
+  \bigskip{A operação {\tt calcularSaldo()} não possui implementação, serve como contrato de 
+    nomes de operações a serem implementadas.}
+
+\end{frame}
+
+
+\begin{frame}{Objeto}
+
+  \begin{itemize}
+  \item Instância de uma classe.
+  \end{itemize}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{object}[text width=7cm]{conta da Alice : ContaBancaria}{0,0}
+        \attribute{numero = 12345}
+        \attribute{correntista = Alice}
+        \attribute{saldo = 100}
+    
+        \operation{depositar(valor : Currency)}
+        \operation{\it calcularSaldo() : Currency}
+      \end{object}
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\transitionslide{Relacionamentos}
+
+\begin{frame}{Generalização}
+  
+  \begin{tikzpicture}
+
+    \begin{class}{Shape}{1,0}
+      \attribute{origin: Point}
+      \operation{move(p : Point)}
+      \operation{display()}
+    \end{class}
+
+    \begin{class}[text width=2.5cm]{Rectangle}{-4.5,-3.5}
+      \inherit{Shape}
+      \attribute{corner: Point}
+    \end{class}
+
+    \begin{class}[text width=2.5cm]{Circle}{-1,-3.5}
+      \inherit{Shape}
+      \attribute{radius: Float}
+    \end{class}
+
+    \begin{class}[text width=2.5cm]{Polygon}{3,-3}
+      \inherit{Shape}
+      \attribute{points: List}
+      \operation{display()}
+    \end{class}
+
+
+  \end{tikzpicture}
+
+\end{frame}
+
+
+\begin{frame}{Dependência}\small
+
+  \begin{itemize}
+  \item Um relacionamento de \alert{dependência} indica que uma classe utiliza a outra.
+  \end{itemize}
+
+
+  \begin{tikzpicture}
+
+    \begin{class}[text width=3cm]{Window}{-3,0}
+      \operation{open()}
+      \operation{close()}
+      \operation{move()}
+      \operation{display()}
+      \operation{handleEvent()}
+    \end{class}
+
+    \begin{class}[text width=3cm]{Event}{3,0}
+    \end{class}
+
+    \draw[umlcd style dashed line ,->] (Window.east) |- node[black]{} (Event);
+  
+  \end{tikzpicture}
+
+  \bigskip {Uma alteração na classe {\tt Event} afeta {\tt Window},  mas não o contrário.}
+
+\end{frame}
+
+\begin{frame}{Associação}\small
+
+  \begin{itemize}
+  \item Uma \alert{associação} é um relacionamento estrutural que especifica que as classes
+    estão conectadas umas as outras. Junto à ligação pode ser indicado os \alert{papéis} e a
+    \alert{multiplicidade} entre as classes.
+  \end{itemize}\bigskip
+
+
+  \begin{tikzpicture}
+
+    \begin{class}[text width=3cm]{Pessoa}{-4,0}
+    \end{class}
+
+    \begin{class}[text width=3cm]{Empresa}{4,0}
+    \end{class}
+
+    \association{Pessoa}{empregado}{1..*}{Empresa}{empregador}{*}
+
+  \end{tikzpicture}
+
+\end{frame}
+
+
+\begin{frame}{Agregação}
+  
+  \begin{tikzpicture}
+
+    \begin{class}[text width=3cm]{Carro}{-3,0}
+    \end{class}
+
+    \begin{class}[text width=3cm]{Roda}{3,0}
+    \end{class}
+
+    \aggregation{Carro}{rodas}{4}{Roda}
+
+  \end{tikzpicture}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Pacote}\footnotesize
+
+  \begin{itemize}
+  \item Reune interfaces e classes que possuem características comuns.
+  \end{itemize}
+
+  \begin{center}
+    \begin{tikzpicture}
+
+      \begin{package}{Contas}
+
+        \begin{abstractclass}{ContaBancaria}{-1,0}
+          \attribute{numero : Integer}
+          \attribute{correntista : String}
+          \attribute{saldo : Currency = 0}
+    
+          \operation{depositar(valor : Currency)}
+          \operation{\it calcularSaldo() : Currency}
+        \end{abstractclass}
+
+        \begin{class}[text width=5.5cm]{Poupanca}{2.25,-3.5}
+          \inherit{ContaBancaria}
+          \attribute{rendimento : Percentage}
+    
+          \operation{depositarMensalmente(valor : Currency)}
+          \operation{calcularSaldo() : Currency}
+        \end{class}
+
+        \begin{class}[text width=5cm]{ContaCorrente}{-3.35,-3.75}
+          \inherit{ContaBancaria}
+          \attribute{limiteChequeEspecial : Currency}
+    
+          \operation{compensarCheque(valor : Currency)}
+          \operation{calcularSaldo() : Currency}
+        \end{class}
+
+
+      \end{package}
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}{Visibilidade}\small
+
+  \begin{center}
+    \begin{tikzpicture}
+
+      \begin{class}{Classe}{0,0}
+        \attribute{$+$ público}
+        \attribute{$-$ privado}
+        \attribute{$\#$ protegido}
+        \attribute{$\sim$ pacote}
+      \end{class}
+
+      \onslide<2>{
+        \begin{abstractclass}{ContaBancaria}{0,-4}
+          \attribute{$\#$ numero : Integer}
+          \attribute{$+$ correntista : String}
+          \attribute{$-$ saldo : Currency = 0}
+    
+          \operation{$+$ depositar(valor : Currency)}
+          \operation{$\#$ \it calcularSaldo() : Currency}
+        \end{abstractclass}
+      }
+
+    \end{tikzpicture}
+  \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Referências}
+
+  \begin{thebibliography}{Rumbaugh, 1998}
+
+  \bibitem[Rumbaugh, 1998]{rumbaugh1998}
+    James Rumbaugh, Ivar Jacobson, Grady Booch.
+    \newblock 	   {\em The Unified Modeling Language User Guide}.
+    \newblock	   Addison-Wesley, 1998.
+ 	   
+  \bibitem[Blaha, 2005]{blaha2005}
+    Michael Blaha, James Rumbaugh.
+    \newblock	  {\em Modelagem e Projetos Baseados em Objetos com UML 2}.
+    \newblock	  2$^a$ edição, Editora Campus, 2005.
+
+  \bibitem[]{Yuan, 2012} Yuan Xu.
+    \newblock {\em Drawing UML Class Diagram by using} {\tt pgf-umlcd}.
+    \newblock \url{http://goo.gl/x1W2LV}
+
+  \end{thebibliography}
+
+\end{frame}
+

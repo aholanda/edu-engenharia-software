@@ -1,0 +1,57 @@
+
+\paragraph{Exercício \exno.} O diagrama de Gantt é importante para ter uma
+visualização temporal das etapas de desenvolvimento de um
+projeto. Desenhe o diagrama de Gantt para as tarefas da Tabela~\ref{tab:tasks},
+respeitando as precedências dentre elas:
+
+\begin{table}[ht]
+\begin{center}
+\bigskip\begingroup\small
+\begin{tabular}{c|l|c|l}\hline
+\bf Tarefa & \bf\hfil Descrição & \bf Semanas & \bf É precedida por \\\hline\hline
+A & Criar telas & 3 & nenhuma\\
+B & Implementar cadastrar semanas & 5 & A e G \\
+C & Implementar estoque matéria-prima & 4 & A e G \\
+D & Implementar estoque produto & 5 & A e G \\
+E & Implementar verificar teste & 3 & B\\
+F & Criar banco de dados & 5 & nenhuma \\
+G & Inicializar banco de dados teste & 1 & F \\
+H & Implementar guia de busca & 9 & D \\
+I & Implementar comprar matéria-prima & 5 & C \\
+J & Implementar controlar pedidos & 4 & E \\
+L & Implementar controlar contas a receber & 3 & A e G \\
+M & Implementar compor custos do produto & 5 & L \\
+N & Implementar emitir fatura & 3 & M \\
+O & Integrar subsistema vendas & 4 & J e N \\
+P & Integrar subsistema estoque & 3 & I \\
+Q & Integrar subsistema produção & 3 & H \\
+R & Realizar o teste do sistema & 4 & O, P e Q \\\hline
+\end{tabular}
+\caption{Etapas de desenvolvimento de um projeto de software.}
+\label{tab:tasks}
+\endgroup
+\end{center}
+\end{table}
+
+
+\question{1,5} Fazer o diagrama de Gantt para as seguintes etapas
+mostradas na Tabela~\ref{tab:tasks}.
+
+\begin{table}[ht]
+\begin{center}
+\bigskip\begingroup\small
+\begin{tabular}{c|l|c|l}\hline
+\bf Tarefa & \bf\hfil Descrição & \bf Semanas & \bf É precedida por \\\hline\hline
+  A & Especificação         & 3  & nenhuma\\
+  B & Manual do usuário     & 10 & nenhuma \\
+  C & Modelo banco de dados & 4  & A \\
+  E & Funções de consulta   & 3  & C  \\
+  F & Interface gráfica     & 5  & E  \\
+  G & Teste                 & 4  & F  \\\hline
+\end{tabular}
+\caption{Etapas de desenvolvimento de um projeto de software.}
+\label{tab:tasks}
+\endgroup
+\end{center}
+\end{table}
+

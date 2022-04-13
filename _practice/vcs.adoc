@@ -1,0 +1,261 @@
+== Sistema de Controle de Versão
+
+Uma ferramente de controle de versão de código é fundamental para o
+gerenciamento de suas alterações de forma a minimizar os conflitos de
+diferentes versões de diferentes desenvolvedores, desfazer alterações
+que possam ter inserido erro ao código, manter um histórico organizado
+das alterações realizadas.
+
+=== Git
+
+Para abordar algumas tarefas de gerenciamento de controle de versão,
+vamos adotar o https://git-scm.com/[git] como referência. O `git` é
+uma ferramenta de controle distribuído de versão de sistemas projetada
+para lidar de forma eficiente de pequenos a grandes projetos.
+
+Um repositório é onde os arquivos ficam armazenados e para criar um projeto
+com repositório local vazio, digitamos dentro do diretório:
+
+[source,sh]
+----
+$ git init
+----
+
+Este comando cria um diretório escondido chamado `.git/`, onde o `git`
+armazena a informação a respeito do projeto, para verificar o conteúdo
+do diretório, basta digitar:
+
+[source,sh]
+----
+$ ls  .git                                                                                                                                                   
+HEAD  branches  config  description  hooks  info  objects  refs 
+----
+
+Vamos supor que queremos adicionar o programa,
+{githubLnk}/_practice/src/fatorial.c[fatorial.c]:
+
+Para adicioná-lo, digitamos
+
+[source,sh]
+----
+$ git add fatorial.c
+----
+
+ou
+
+[source,sh]
+----
+$ git add *.c
+----
+
+para adicionarmos todos os arquivos com extensão `.c`, ou ainda
+
+[source,sh]
+----
+$ git add *
+----
+
+para adicionarmos todos os arquivos existentes no diretório.
+
+Para escrever os arquivos adicionados no repositório, devemos
+efetuar
+
+[source,sh]
+----
+$ git commit -m 'início do projeto'
+----
+
+Lembrando que o repositório é local, ou seja, não está acessível ainda
+a nenhum outro desenvolvedor.
+
+Se quisermos utilizar um repositório já existente, devemos clonar este
+repositório. Por exemplo, o comando
+
+[source,sh]
+----
+$ git clone usuario@host:/caminho/para/repositório
+----
+
+onde é usado o `usuario` para autenticar na máquina `host` e é baixado
+o diretório `/caminho/para/repositório` para a máquina local.
+
+As alterações feitas em repositórios remotos devem ser enviadas pelo comando
+
+[source,sh]
+----
+$ git push origin master
+----
+
+ou somente
+
+[source,sh]
+----
+$ git push
+----
+
+após o primeiro envio.
+
+As alterações enviadas para o repositório por outros desenvolvedores podem
+ser baixadas pelo comando
+
+[source,sh]
+----
+$ git pull
+----
+
+Para verificarmos as alterações que já foram feitas, juntamente
+com seus registros, digitamos
+
+[source,sh]
+----
+$ git log
+----
+
+e para listar o que precisa ser adicionado ou escrito no repositório,
+digitamos
+
+[source,sh]
+----
+$ git status
+----
+
+Para marcarmos uma versão do sistema sob o controle de versão,
+podemos usar
+
+[source,sh]
+----
+$ git tag -a v1.0 -m "primeira versao"
+----
+
+onde `v1.0` é o nome dado à marcação e após `-m` vem a descrição.
+
+Vamos alterar nosso código de cáculo de fatorial para que a função
+seja chamada recursivamente, mas para não alterarmos o código original
+vamos criar uma ramificação (_branch_) chamada `recursivo`:
+
+[source,sh]
+----
+$ git branch recursivo
+----
+
+Para listar as ramificações, digite:
+
+[source,sh]
+----
+$ git branch
+----
+
+será mostrada a ramificação principal `master` a recém-criada
+`recursivo`.
+
+Vamos mudar para a ramificação `recursivo` com o comando
+
+[source,sh]
+----
+$ git checkout recursivo
+----
+
+e alterar o código do fatorial de forma que seja calculado
+recursivamente, como listado no arquivo
+{githubLnk}/_practice/src/fatorial_rec.c[fatorial_rec.c]:
+
+Alteraremos o código e aplicaremos as modificações na ramificação:
+
+[source,sh]
+----
+$ git commit -m 'calculo do fatorial usando recursividade' fatorial.c
+----
+
+Voltaremos para a ramificação principal, visto que o código está
+estável e sem _bugs_ e faremos a junção no ramo principal, agora sim
+sobrescrevendo o anterior.
+
+[source,sh]
+----
+$ git checkout master
+$ git merge recursivo
+----
+
+Não precisamos mais do ramo `recursivo`, podemos apagá-lo com o comando
+
+[source,sh]
+$ git branch -d recursivo
+----
+
+Para verificar a linha de tempo das versões dos arquivos, execute:
+
+[source,sh]
+----
+$ git log --oneline --decorate
+----
+
+a mesma função, porém, com sequência na estrutura de um grafo acíclico:
+
+[source,sh]
+----
+$ git log --oneline --decorate --graph
+----
+
+==== Exercícios
+
+1. Crie um projeto vazio para o Git e faça _download_ de alguns arquivos
+  usando os comandos a seguir:
+
+[source,sh]
+----
+$ mkdir calc
+$ cd calc
+$ git init
+$ wget https://raw.githubusercontent.com/ajholanda/edu-softeng/master/TDD/Calculadora.java
+$ wget https://raw.githubusercontent.com/ajholanda/edu-softeng/master/TDD/TesteCalculadora.java
+----
+
+Após descompactá-lo, execute as seguintes tarefas:
+
+a. Adicione os arquivos para serem monitorados;
+b. Faça o primeiro `commit` para gravar as versões atuais no repositório local;
+c. Crie um ramos chamado `multi` e vá para este ramo;
+d. Modifique o arquivo Calculadora.java, adicionando o método `multiplicar()`, que realiza a multiplicação dos argumento inteiros `x` por `y`;
+e. Faça o `commit` desta modificação no ramo `multi`;
+f. Volter para o ramo `master` e veja o conteúdo de `Calculadora.java`;
+g. Faça a fusão dos ramos `master` e `multi`;
+h. Volte para o ramo `multi`, mude o nome do método `somar()` para `add()`em `Calculadora.java`, efetue o `commit`. Volte para o ramo `master` e mude o nome do método `somar()` para `adicionar()` em `Calculadora.java`, efetue o `commit`. Faça o `merge` de `multi` no ramo `master` e resolva os conflitos, realizando o `commit` após a resulução.
+i. Faça o `commit`.
+j. Volte para o `master` e faça o `merge`.
+k. Resolva os conflitos e faça o `commit`.
+l. Remova o ramo `multi`;
+m. Use os comandos `git log` para ver as mensagens de modificação e `git diff` para checar as diferenças entre as versões.
+
+2. Crie um projeto no repositório https://github.com/[GitHub],
+adicione os arquivos {githubLnk}/TDD/Calculadora.java[Calculadora.java]
+ e {githubLnk}/TDD/TesteCalculadora.java[TesteCalculadora.java], 
+e execute as mesmas tarefas do exercício anterior, mas lembrando de
+aplicar as modificações no repositório remoto GitHub.
+
+[source,sh]
+----
+$ git clone https://github.com/<usuario>/calc.git calc.git
+$ cd calc.git
+$ wget https://raw.githubusercontent.com/ajholanda/edu-softeng/master/TDD/Calculadora.java
+$ wget https://raw.githubusercontent.com/ajholanda/edu-softeng/master/TDD/TesteCalculadora.java
+$ git add *
+$ git commit -m 'inicio' *
+$ git push origin remote
+----
+
+==== Alternativas
+
+Existem vários programas para controlar o processo de alteração no
+ projeto de software, dentre eles podemos destacar:
+
+* http://www.nongnu.org/cvs/[cvs];
+* https://subversion.apache.org/[subversion];
+* https://www.mercurial-scm.org/[mercurial];
+* http://bazaar.canonical.com/en/[bazaar];
+* http://darcs.net/[darcs].
+
+==== Referência
+
+Para aprofundar os conhecimentos sobre o uso do `git`, o livro _online_
+ https://git-scm.com/book/pt-br/v1/[Pro Git] é um ótima
+ referência.

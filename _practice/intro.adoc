@@ -1,0 +1,21 @@
+## Engenharia de Software
+
+### Introdução
+
+//e source: https://www.youtube.com/watch?v=tISy7EJQPzI&t=8m17s 
+
+* Programação x Engenharia de Software
+
+* Engenharia é a programação integrada ao longo do tempo.
+  
+* Engenharia de Software é resiliente ao tempo, e necessita das seguintes ferramentas:
+	- Sistema de controle de versão;
+	- Integração contínua;
+	- Testes de unidade;
+	- Ferramentas de *refactoring*;
+	- Padrões de projeto (*design patterns*);
+	- Gerenciamento de dependências.
+
+1) *Exercício*. Leia o artigo https://research.swtch.com/vgo-eng["What's software
+engineering"] do Russ Cox e faça
+ligações das passagens do texto com as ferramentas listadas.

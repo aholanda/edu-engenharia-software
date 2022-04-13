@@ -1,0 +1,473 @@
+\paragraph{1.} Com relação ao artigo \href{https://imasters.com.br/desenvolvimento/e-assim-que-o-facebook-desenvolve-software-e-o-coloca-em-producao-devo-me-preocupar/}{``É assim que o Facebook
+desenvolve software e o coloca em produção. Devo me preocupar?''},
+responda às questões:
+
+\begin{enumerate}[a)]
+\item Descreva a abordagem de desenvolvimento do Facebook. Está mais
+  próxima da clássica ou ágil?
+\item Kent Beck é citado no artigo, qual metologia ele foi criador?
+\item O termo {\em Sprint} é citado no texto, em qual metodologia é utilizado?
+  Descreva-o sucintamente.
+\item Por quê o Facebook não realiza testes? Isto está de acordo com as
+  metodologias ágeis? Explique sua resposta.
+\item Ao invés da programação em pares, o Facebook adota a revisão do
+  código. Quais as vantagens deste procedimento em termos de qualidade e
+  custo do código?
+\end{enumerate}
+
+\paragraph{2.} Com relação ao artigo \href{http://computerworld.com.br/adote-metodologia-agil-para-viabilizar-transformacao-digital}{``Adote metodologia ágil para viabilizar a transformação digital''}, responda às questões:
+
+\begin{enumerate}[a)]
+\item No texto é citado a entrega frequente e adequação às mudanças de
+  requisitos das metodologias ágeis. Isto ocorre com o uso das
+  metodologias clássicas? Explique sua resposta.
+\item Outro ponto citado é a utilização de testes, quais as diferenças
+  entre os testes das metodologias ágeis e clássicas?
+\item O autor avalia as práticas e processos das metodologias
+  clássicas como burocráticas. Na sua visão, qual o motivo desta
+  avaliação?
+\end{enumerate}
+ 
+\paragraph{3.} Com relação ao artigo \href{https://conteudo.startse.com.br/educacao/redacao/os-4-pilares-da-metodologia-de-trabalho-do-google/}{``Os 4 pilares da metodologia de
+trabalho do Google''}, responda às questões:
+
+\begin{enumerate}[a)]
+\item A empresa Google baseia o desenvolvimento de sistemas em alguma
+  metodologia ou possui sua própria? Descreva sucintamente como é a
+  metodologia.
+\item O artigo descreve que na empresa acontece reuniões semanais para
+  acompanhamento do que acontece nos projetos. Faça uma analogia deste
+  processo com algum processo de outra metodologia de sua escolha.
+\item Qual é a métrica utiliza pela empresa?
+\item Qual a importância do foco para a obtenção de resultados na
+  empresa?  E qual o número máximo de projetos que um funcionário pode
+  se envolver?
+\item A avaliação de resultados do método OKR á parte integrante
+  da metodologia? Explique sua resposta.
+\end{enumerate}
+
+\end{document}
+
+\newpage
+
+\begin{verbatim}
+
+É assim que o Facebook desenvolve software e o coloca em produção. Devo me preocupar?
+
+Por Jim Bird em	06/11/2013
+  
+ 
+Um recente artigo acadêmico publicado pelo prof. dr. Feitelson da
+Hebrew University, por Eitan Frachtenberg, pesquisador no Facebook, e
+por Kent Beck (que também está fazendo alguma coisa no Facebook),
+descreve a abordagem do Facebook para desenvolver e colocar em
+funcionamento o seu software frontend. Apesar de que seria muito mais
+interessantes entender como o desenvolvimento backend é feito (é lá
+que a maior parte do trabalho é realizado para manipular centenas de
+milhões de usuários), há algumas coisas no artigo que valem a pena
+saber.
+
+Continuous Deployment no Facebook não é Continuous Deployment Em vez
+de planejarem o trabalho em projetos ou dividir o trabalho em Sprints,
+desenvolvedores do Facebook fazem a maior parte do trabalho em
+pequenas mudanças independentes que são lançadas frequentemente. Isso
+faz sentido no modelo de negócio online do Facebook, no qual todos
+estão ajustando constantemente a plataforma e tentando novas opções e
+aplicativos em diferentes comunidades de usuários e vendo o que
+funciona. Isso se deve à arquitetura que permite que mudanças tão
+pequenas e independentes possam na verdade ser feitas de maneira
+independente e barata.
+
+O Facebook diz que eles seguem o continuous deployment, mas não se
+trata de continuous deployment da forma que IMVU tornou popular, na
+qual todas as mudanças são enviadas aos clientes imediatamente, ou
+mesmo como uma empresa como a Etsy faz continuous deployment.
+
+No Facebook, código pode ser lançado duas vezes por dia, mas isso é
+normalmente feito principalmente para correções de bugs e código
+interno. Código de produção novo é lançado uma vez por semana:
+milhares de mudanças de centenas de desenvolvedores são empacotadas no
+domingo pela pequena equipe de “release” que eles possuem, passadas em
+testes automatizados de regressão e colocados em funcionamento na
+terça-feira, caso os desenvolvedores que contribuíram com as mudanças
+estiverem presentes. Engenheiros de “release” avaliam o risco das
+mudanças baseados no tamanho delas, na quantidade de discussão feita
+na revisão do código (que é gravada através de um sistema interno de
+revisão de código) e no “push karma” de cada desenvolvedor: em quantos
+problemas eles viram no código desse desenvolvedor anteriormente.
+
+Uma ferramenta chamada “Gatekeeper” (porteiro) controla que recursos
+estarão disponíveis para quais clientes de forma a suportar dark
+launching, e todo código é disponibilizado incrementalmente – colocado
+em “staging”, depois para um grupo de usuários, e assim por
+diante. Mudanças podem ser desfeitas caso seja necessário –
+individualmente, ou como último recurso, todo um release de
+código. Entretanto, como em muitas empresas do Vale do Silício que
+adotam devops, eles seguem o lema “homens de verdade só vão para
+frente”.
+
+Propriedade de código Uma chave para a cultura do Facebook é que os
+desenvolvedores são individualmente responsáveis pelo código que eles
+escrevem, para testá-lo e suportá-lo em produção. Isso está refletido
+no modelo de propriedade de código que eles adotam:
+
+Desenvolvedores precisam dar suporte para o uso operacional de seu
+código – uma combinação que vem sendo chamada de “devops”. Isso
+incentiva a escrita de código de qualidade e testes extensivos. O
+risco pessoal dos desenvolvedores em manter o sistema funcionando bem
+complementa os procedimentos de engenharia e permite que o sistema
+mantenha qualidade em escala. Metodologias e ferramentas não são
+suficientes porque elas sempre podem ser mal utilizadas. Por isso, uma
+cultura de responsabilidade pessoal é algo crítico.
+
+Consequentemente, a maior parte dos arquivos de código fonte é
+modificada por apenas alguns engenheiros. Apesar de pelo menos mais um
+engenheiro rever todas as mudanças antes que sejam feitos os commits,
+um terço dos arquivos de código fonte foram editados por apenas um
+engenheiro e outro quarto por dois. Apenas 10\% dos arquivos foram
+manipulados por mais de 7 engenheiros. Por outro lado, a distribuição
+dos engenheiros pelos arquivos possui uma longa cadeia, com os
+arquivos mais compartilhados sendo utilizados por não menos de 870
+engenheiros distintos. Esses arquivos amplamente compartilhados são
+predominantemente arquivos de bibliotecas e também incluem principais
+configurações e arquivos de alto nível do PHP.
+
+Testes? Não precisamos de testes… O Facebook não possui um time de
+testes independente, porque eles dizem que não precisam de um.
+
+Primeiro, eles dependem muito de revisão de código para encontrar os bugs:
+
+No Facebook, revisão de código ocupa uma posição central. Cada linha
+de código é escrita e revisada por um engenheiro diferente do autor
+original. Isso serve a múltiplos objetivos: o engenheiro original é
+motivado a assegurar que seu código é de alta qualidade, o revisor
+chega com uma “cuca fresca” e talvez encontre defeitos ou sugira
+alternativas e, em geral, o conhecimento sobre as práticas de
+programação e do próprio código se espalham pela empresa.
+
+Desenvolvedores também são responsáveis por escrever testes unitários
+e seus próprios testes de regressão – eles possuem “dezenas de
+milhares de testes de regressão” (o que não parece ser suficiente para
+as mais de 10 milhões de linhas de código em sua maioria em PHP
+compilado para C++, ambas linguagens nas quais é comum comentar erros)
+e testes automatizados de desempenho.
+
+E os desenvolvedores também testam o software ao usar a versão de
+desenvolvimento do Facebook em suas próprias contas pessoais da rede
+social. De acordo com os autores “este é apenas um aspecto do abandono
+das técnicas tradicionais de desenvolvimento de software”. Mas
+desenvolvedores do Facebook usando seus próprios softwares
+internamente (e considerando isso como “teste”) não é diferente do
+passado da Microsoft, em que os empregados supostamente deveriam
+“provar do próprio veneno”, uma prática que surtiu pouco, ou nenhum
+efeito, na qualidade dos produtos da empresa.
+
+O Facebook também depende dos clientes para testar seu software para
+eles. O software é lançado em etapas para testes A/B e “experiência em
+tempo real”, em subgrupos da base de usuários, caso os clientes
+queiram participar desses testes ou não. Pelo fato de a base de
+usuários deles ser tão grande, eles podem ter um feedback
+significativo a partir dos testes, mesmo com uma pequena porcentagem
+dos seus usuários, o que pelo menos minimiza o risco de inconvenientes
+para os clientes.
+
+Segurança???
+
+Apesar de o desempenho ser considerado importante para os
+desenvolvedores do Facebook, não há menção a verificações ou testes de
+segurança em lugar algum da descrição de como os devops da empresa
+colocam software para rodar. Sem análise/scanner estático ou dinâmico,
+teste de invasão ou explicação de como o time de segurança e
+desenvolvedores trabalham juntos, nem mesmo para “código relacionado à
+privacidade” – apesar de esse código ser “mantido em padrões mais
+elevados”, eles não explicam o que são “padrões mais
+elevados”. Presumivelmente, eles contam com o uso de bibliotecas e
+frameworks para lidar pelo menos com alguns aspectos de segurança no
+aplicativo e possivelmente procurar por bugs de segurança em suas
+revisões de código, mas eles não dizem nada.
+
+Não há muita informação disponível sobre o programa de segurança do
+Facebook. O time de segurança da empresa parece gastar bastante tempo
+educando as pessoas sobre como usar o Facebook de forma segura, como
+desenvolver aplicativos seguros e executando seu programa de caça aos
+bugs, que paga uma recompensa em dinheiro a pessoas de fora da
+companhia que foram capazes de encontrar um bug para eles.
+
+Uma busca sobre segurança no Facebook em sua maior parte retorna uma
+longa lista de falhas públicas de segurança, violações de privacidade
+e vulnerabilidades de segurança encontradas em todos esses anos e que
+continuam até hoje. Talvez a falta de um programa efetivo de segurança
+(appsec) seja a causa para isso.
+
+Essa é a forma como o Facebook desenvolve. Devo me importar?  Apesar
+de ser interessante ver como funciona por dentro uma empresa tão
+conhecida como o Facebook e como eles desenvolvem software em grande
+escala, não fica claro por que esse artigo foi escrito. Há pouco sobre
+o que o Facebook está fazendo (em seu desenvolvimento frontend, pelo
+menos), algo que seja exclusivo ou inovador, exceto talvez pela forma
+como eles usam BitTorrent para enviar código para os milhares de
+servidores, como faz o Twitter, algo que eu já tinha ouvido há alguns
+anos na Velocity e que já havia sido escrito antes.
+
+Eu gosto da ideia de desenvolvedores serem responsáveis por seu
+trabalho, desde o início até a produção, que é um princípio que também
+seguimos. Revisões de código são boas. Recursos de dark launching são
+uma boa prática e têm sido comum há um bom tempo (mesmo antes de serem
+chamadas de “dark lauching”). Não ter testes para appsec não é bom. De
+qualquer forma, não sei o que podemos aprender ou gostaríamos de usar
+a partir da experiência deles.
+
+***
+
+Artigo traduzido pela Redação iMasters, com autorização do
+autor. Publicado originalmente em
+http://swreflections.blogspot.com.br/2013/09/this-is-how-facebook-develops-and.html
+\end{verbatim}
+
+
+\newpage
+
+\begin{verbatim}
+Adote metodologia ágil para viabilizar a transformação digital
+
+Entregar frequentemente algo na menor escala de tempo faz com que o
+cliente consiga ver o valor agregado e o progresso do produto
+
+João Gatto*
+23 de Junho de 2015 - 08h30
+
+Ultimamente muito se tem falado de transformação digital, conceito que
+vai além de automatizar processos, e mostra que os modelos de negócio
+deixaram de ser algo imobilizado, ou seja, modelos de negócio devem
+ser criados e alterados de maneira contínua. E para que isso fosse
+possível, muitas frentes como Cloud Computing, Big Data, Mobile
+Payment, IoT (Internet of Things), entre outras, foram criadas para
+inovar e melhorar os serviços e produtos fornecidos pelas
+empresas. Mas será que as empresas estão adotando maneiras ágeis e
+flexíveis para fornecer tais serviços?
+
+Devido à rápida evolução tecnológica, as empresas estão se
+transformando e criando concorrência inesperada para os gigantes do
+mercado. Por exemplo, recentemente tivemos a criação do Uber na
+indústria de táxis, Airbnb na indústria hoteleira, Netflix na
+indústria de filmes e entretenimento, Whatsapp na indústria da
+comunicação, entre outros que influenciam diretamente os modelos de
+negócios que antes estavam estagnados e que foram alterados usando o
+que a tecnologia tem a oferecer atualmente como forma de se posicionar
+novamente de maneira competitiva no mercado.
+
+ Por isso muitas empresas estão adotando a metodologia ágil na sua
+maneira de trabalhar e estão vendo que ela não é apenas uma melhoria
+de processo, mas sim uma nova necessidade estratégica. Quando se trata
+de metodologia ágil, o grande desafio é criar o mindset ágil. Não
+significa apenas ter as skills e know-how, mas também cultivar um time
+ágil, sendo suportado pela alta gerência da organização.
+
+Diante desse cenário de mudança constante, como a metodologia ágil
+pode ajudar na entrega da transformação digital? Simples: ao contrário
+das metodologias tradicionais, que demandam muito tempo para entregar
+algo funcionando ao cliente, um dos princípios da metodologia ágil é
+satisfazer o cliente através de entregas em curtos espaços de tempo de
+maneira contínua e adiantada, sempre tendo em mente o mais importante:
+o valor agregado.
+
+Entregar frequentemente algo na menor escala de tempo, entre duas a
+três semanas, faz com que o cliente consiga ver o valor agregado e o
+progresso do produto. Quando entregamos valor agregado precisamos ter
+em mente três pontos: custo (quanto custa fazer esta parte do
+produto?), negócio (qual o retorno esta parte do produto trará para o
+negócio como um todo?) e o ROI (quanto tempo vai levar até obter o
+retorno sobre o investimento?). Agora imagine um projeto para mobile
+payment, seguindo a metodologia tradicional, na qual o cliente só
+receberia o produto pronto, de acordo com o es
+
+copo acordado depois de alguns meses. Será que os requisitos
+levantados pelo cliente são os mesmos que foram acordados no início do
+projeto? Será que as tecnologias para esse tipo de projeto não
+sofreram alguma alteração durante esse período?
+
+Usando a metodologia ágil há um melhor gerenciamento da mudança de
+requisitos, pois ela assume que os requisitos iniciais vão ser
+alterados, mesmo tardiamente, podendo criar uma vantagem competitiva
+para o cliente e ainda ser um diferencial para a empresa prestadora do
+serviço.
+
+Outro ponto importante quando falamos de metodologia ágil é a questão
+da qualidade, que é garantida através da correta aplicação das
+melhores práticas, nas quais são realizados frequentes testes em cada
+uma das funcionalidades, possibilitando a identificação de qualquer
+problema com antecedência necessária para que a entrega final do
+produto seja feita dentro do prazo e das especificações acordadas com
+o cliente.
+
+A transformação digital hoje é uma realidade que vem crescendo e
+revolucionando o mercado de TI. As empresas que ainda usarem
+metodologias de desenvolvimento e entrega com práticas e processos
+burocráticos estão fadadas a perder mercado para os concorrentes. Para
+evitar que isso aconteça, novos processos funcionam como aliados e
+devem ser adotados por todos da empresa.
+
+*João Gatto é Technical Analyst do Agile Center da GFT Brasil,
+companhia de Tecnologia da Informação especializada no setor
+financeiro.
+
+\end{verbatim}
+
+\newpage
+
+\begin{verbatim}
+Os 4 pilares da metodologia de trabalho do Google
+
+Com milhares de funcionários, gigante da internet faz questão de
+manter a cultura e a organização de uma startup
+
+
+Perto de completar vinte anos, o Google já deixou de ser startup há
+mais de dez – mais precisamente em 19 de agosto de 2004, quando
+ocorreu sua abertura de capital – mas nem por isso deixou de atuar
+como tal.
+
+Tanto a cultura organizacional como a gestão da empresa ainda seguem
+os mesmos princípios das melhores e mais enxutas empresas de
+tecnologia do Vale do Silício, nos EUA, algo definido internamente
+como “Google Style”.
+
+Quem diz isso é José Papo, gerente de relações com startups e
+developers do Google na América Latina.
+
+Segundo Papo, manter a atuação como startup em meio ao grande
+crescimento é algo muito difícil. “Chega um momento em que não se
+mantém mais esse ritmo, mas o Google e outras empresas do Vale
+conseguem”, afirma. “E o que todas elas têm em comum é o método de
+organização”, complementa.
+
+O método é levado tão a sério que o Google faz questão de replicá-lo
+em todas as startups em que investe (só em 2014 a empresa investiu
+mais de R$ 1 bilhão, leia aqui). “Nosso investimento não é apenas
+financeiro, mas também cultural”, avalia Papo.
+
+Conheça a seguir os quatro pilares dessa metodologia e comece a
+aplicá-los hoje mesmo na sua startup. Eles podem ajudá-lo no que há de
+mais importante em uma empresa, a execução, como conclui o gerente do
+Google: “Só a ideia não vale muito, o que vale é a execução dessa
+ideia. E a execução é feita com método.”
+
+1. Liberdade com responsabilidade
+
+Uma das coisas que o Google mais valoriza são as pessoas. É por isso
+que muitos dos benefícios de trabalhar na empresa são conhecidos e
+amplamente difundidos, como a liberdade de horários, o ambiente
+descontraído de trabalho e outros.
+
+Segundo José Papo, a multinacional considera que o maior ativo das
+empresas de tecnologia são os chamados “criativos inteligentes” (smart
+creatives). “Eles não são só os desenvolvedores de software, são todos
+que trabalham criando coisas, de qualquer área. São engenheiros,
+publicitários, marqueteiros…”, explica.
+
+Dessa consciência nasce a primeira premissa do Google: para trabalhar
+com pessoas extremamente criativas e inteligentes, você precisa ter
+liberdade de atuação. “Toda a nossa organização se baseia nesse
+primeiro princípio, que é liberdade com responsabilidade”, define o
+gerente.
+
+2. Objetivos e resultados-chave
+
+Outro pilar da gigante da internet é método de gerenciamento das
+atividades dentro da empresa, chamado OKRs, Objectives and Key Results
+(objetivos e resultados-chave). Também adotado por diversas startups
+do Vale do Silício, é baseado na simplicidade e na disciplina.
+
+“O método OKR define a forma como as áreas e cada indivíduo
+trabalham”, explica Papo. Mas isso não quer dizer que é um plano
+rígido e complexo. “O Google não gosta disso. É um método simples,
+usamos o modelo ‘lean startup’ (startup enxuta). Não ficamos
+escrevendo páginas e páginas de coisas para desenvolver nossas
+ideias. Somos enxutos e focados”, completa.
+
+A disciplina é outro ponto importante do OKR, ajudada pela comunicação
+aberta de todos os processos. “Não adianta falar ou escrever o que
+você quer atingir se não há acompanhamento. Existe uma intranet no
+Google onde escrevemos nossos OKRs e todo mundo sabe o que todo mundo
+está fazendo. Os objetivos e resultados são trimestrais e são públicos
+para todos os funcionários. Eu sei quais são os OKRs do Larry Page (um
+dos fundadores do Google)”, exemplifica Papo, para quem o princípio de
+“quanto mais informação aberta, melhor” também ajuda também na
+cooperação entre tarefas.
+
+O acompanhamento é feito por meio de reuniões semanais de
+resultados. Até mesmo os encontros dos principais nomes da empresa são
+abertos, transmitidos ao vivo via streaming e gravadas, para que
+qualquer funcionário assista quando quiser. Essa cultura, uma surpresa
+no início, é hoje elogiada por Papo: “Toda semana sabemos o que
+acontece na empresa, quais são as prioridades. A grande maioria das
+grandes empresas não faz isso. Elas tendem a esconder informação, não
+abrir”.
+
+3. Métricas
+
+ O terceiro item do método de trabalho Google são os números. Nas
+ palavras de José Papo, a cultura orientada a métricas faz com que o
+ Google não seja regido pelos “hipopótamos”, que no chavão empresarial
+ são as pessoas mais bem pagas da organização.
+
+“Normalmente, nas grandes empresas é assim: quando o vice-presidente
+fala, todo mundo fica quieto. No Google não é assim. Até um
+estagiário, se ele tiver os números para embasar sua opinião, mesmo
+que seja contra a opinião de um vice-presidente, ele pode questionar”,
+exemplifica o gerente. Ele diz ainda que valorizar as pessoas que
+pensam diferente garante a inovação nas empresas: “Para ser uma
+empresa inovadora você tem que ter pessoas inteligentes com poder de
+questionar embasados por números.”
+
+4. Foco
+
+O último pilar do Google é o que José Papo diz ser o principal ponto
+de aprendizado de uma startup desde o início: foco. “Se você não tiver
+foco, vai morrer. Não tente fazer vinte, trinta coisas ao mesmo
+tempo. Foque no que que realmente é importante ou crítico para aquele
+momento que você vive”, defende.
+
+E é justamente para manter o foco e por ser de simples e fácil uso que
+o Google adota o método OKR. Definidos os períodos de tempo, são
+traçados os objetivos, que podem ser qualitativos ou quantitativos, e
+os itens necessários para alcançá-los (resultados-chave). Estes
+últimos precisam ser sempre quantitativos, porque precisam ser
+mensurados.
+
+Pelas regras do Google, cada funcionário pode ter no máximo cinco
+objetivos por trimestre, com quatro resultados-chave dentro de cada
+objetivo. “Mais do que cinco significa para nós que você está fazendo
+coisas demais, não está focado”, justifica. Mas isso depende de cada
+empresa, há quem trabalhe com períodos menores ou maiores.
+
+No final do período, os resultados são avaliados pelo próprio
+funcionário que executa o OKR e, num segundo momento, em conjunto com
+o líder, para que ajustes sejam feitos. E isso acontece em todos os
+níveis da empresa, cada um com seus OKRs, departamentos, times e
+indivíduos. “Não é um método usado para avaliação de performance. Essa
+interação ocorre para aumentar a inovação e a produtividade”, finaliza
+Papo.
+
+Livros para saber mais:
+
+“Como o Google Funciona” (320 páginas), de Eric Schmidt (CEO do
+Google) e Jonathan Rosenberg. Reúne as lições que fizeram da empresa
+uma gigante global conhecida pela missão de inovar
+incessantemente. Eles descrevem como o avanço da tecnologia transferiu
+o poder das corporações para os consumidores e reforçam que, para
+sobreviver, é essencial concentrar esforços na qualidade dos produtos
+e investir em uma nova categoria de profissionais – os criativos
+inteligentes, que unem conhecimento técnico, tino comercial e uma
+criatividade sem limites.
+
+“Google, a biografia – Como o Google pensa, trabalha e molda nossas
+vidas” (464 páginas), do jornalista Steven Levy. Analisa como o Google
+conseguiu ser uma das poucas corporações na história a ser tão
+bem-sucedidas e admiradas quanto, transformando a internet e se
+tornando parte indispensável de nossas vidas. Este livro revelador
+leva os leitores para dentro dos escritórios do Google e mostra como a
+organização funciona.
+
+
+\end{verbatim}

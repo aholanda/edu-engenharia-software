@@ -1,0 +1,180 @@
+\lecture{Análise de Viabilidade}
+
+\lecturetitle{\course}{\insertlecture}
+
+\frame{\maketitle}
+
+\begin{frame}{\insertlecture}
+  
+  Após o levantamento de requisitos, a \alert{\insertlecture\ } deve ser
+  feita para definir se o projeto do sistema será aceito para
+  desenvolvimento.\bigskip\pause
+  
+  A \insertlecture\ é difícil de ser realizadas devido às incertezas geradas por:
+  \begin{itemize}[<+->]\setbeamercovered{transparent}
+  \item incertezas do escopo do projeto, os \alert{clientes} normalmente têm 
+    dificuldade em definir com precisão todos os requisitos;
+  \item dificuldades na definição dos \alert{recursos} a serem utilizados e
+    \alert{cronograma} de execução do projeto;
+  \item necessidade de \alert{mudanças} na organização.
+  \end{itemize}
+
+  \bigskip\pause Soluções \alert{alternativas} para o problema devem
+  ser avaliadas, bem como, a possibilidade de terceirização de alguma
+  etapa do processo.
+
+\end{frame}
+
+\begin{frame}{Classificação da Análise}\small
+  \begin{description}[<+->]\setbeamercovered{transparent}
+  \item[Viabilidade técnica:] confronta as opções de tecnologias 
+    a serem utilizadas para o desenvolvimento do sistema com o 
+    domínio da equipe destas tecnologias.
+  \item[Viabilidade operacional:] determina o grau em que o projeto proposto 
+    se encaixa com:
+    \begin{itemize}[<+->]\setbeamercovered{transparent}
+      \item a cultura da organização;
+      \item os processos existentes;
+      \item cronograma de projetos em andamento.
+      \end{itemize}
+    \item[Viabilidade econômica:] determina o efeito da produção do sistema, 
+    segundo o projeto proposto, nas finanças da organização.
+  \item[Viabilidade legal:] determina se o sistema proposto está em conformidade 
+    com a legislação vigente no país.
+  \end{description}
+\end{frame}
+
+\begin{frame}{Identificação dos Riscos}\small
+  
+  A \insertlecture\ visa identificar os \alert{riscos} técnicos, operacionais, 
+  econômicos e legais caso a organização aceite o projeto.
+
+  \bigskip\pause
+
+  Ela ajuda a elaborar um plano de contingência para cada risco identificado. Por exemplo:
+  \begin{itemize}[<+->]\setbeamercovered{transparent}
+  \item O que fazer se o uso da linguagem X com o banco de dados BZ se mostrar inviável?
+  \item O que fazer se o programador Beto se afastar por motivo de saúde por X dias?
+  \item O que fazer se  houver problemas com o servidor de desenvolvimento e o deixar 
+    indisponível por X horas?
+  \item O que fazer se o preço da licença do software WW usado para o desenvolvimento 
+    {\em web} aumentar de valor ao ser renovada?
+  \end{itemize}
+
+  \pause
+  
+  Quanto mais dificuldades forem analisadas nesta fase, menor a
+  probabilidade da organização sofrer grandes impactos no cronograma
+  de execução e orçamento do projeto.
+\end{frame}
+
+\begin{frame}{\insertlecture}{Escopo}
+  
+  O \alert{escopo} expressa as \alert{fronteiras} (requisitos) do sistema e deve conter:
+  \begin{itemize}[<+->]\setbeamercovered{transparent}
+  \item lista de \alert{funções incluídas};
+  \item lista de \alert{funções excluídas};
+  \item lista de \alert{dependências};
+  \item lista dos \alert{sistemas atuais a serem substituídos}.
+  \end{itemize}
+
+  \bigskip\pause
+  Confusão sobre o escopo costuma ser a principal razão da insatisfação 
+  do cliente com o sistema.
+\end{frame}
+
+\begin{frame}{\insertlecture}{Benefícios}
+  
+  Benefícios da \insertlecture:
+
+  \begin{itemize}[<+->]\setbeamercovered{transparent}
+  \item Criação de um produto ``vendável'';
+  \item Melhora a eficiência da organização;
+  \item Organiza um processo de produção complexo;
+  \item Possibilidade de inovação ou melhoria dos processo existentes;
+  \item Proteção e segurança.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertlecture}{Técnica}
+  
+  A \insertlecture\ precisa demonstrar que o sistema proposto é 
+  tecnicamente viável. Isto requer:
+  
+  \begin{itemize}[<+->]\setbeamercovered{transparent}
+  \item um \alert{esboço} dos requisitos;
+  \item um \alert{esboço} do modelo ou especificação;
+  \item opções de módulos a serem adquiridos;
+  \item \alert{estimativa} da quantidade de usuários, dados, transações e outros 
+    elementos que o sistema tratará.
+  \end{itemize}
+
+  \pause\bigskip
+
+  Estes números aproximados farão parte do plano de provisionamento de recursos: 
+  equipe, cronograma, equipamentos.
+
+\end{frame}
+
+\begin{frame}{Técnicas para \insertlecture}
+  O \alert{objetivo de maior prioridade} é assegurar que o cliente e a
+  equipe de desenvolvimento tenham o mesmo entendimento sobre os
+  requisitos do sistema.
+  \pause\bigskip
+  
+  Para a \alert{equipe de desenvolvimento} entender os requisitos é necessário:
+  \begin{itemize}[<+->]\setbeamercovered{transparent}
+  \item Entrevista com o cliente e os funcionários da organização do cliente;
+  \item Revisão dos sistemas já existentes (incluindo concorrentes).
+  \end{itemize}
+  
+  \pause\bigskip
+  Para o \alert{cliente} apreciar a proposta é necessário:
+  \begin{itemize}[<+->]\setbeamercovered{transparent}
+  \item Demonstração das principais funcionalidade de sistemas similares;
+  \item Demonstração da imagem da interface com o usuário;
+  \item Rever os principais processos a serem implementados.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Técnicas para \insertlecture}
+  \alert{Esboço do orçamento:}
+  \begin{itemize}[<+->]\setbeamercovered{transparent}
+  \item $n$ pessoas por $m$ meses a R\$~$X$ por mês;
+  \item equipamentos, custos fixos, licenças de software;
+  \item contingência.
+  \end{itemize}
+  
+  \pause\bigskip
+  
+  \alert{Fases ou etapas de desenvolvimento}
+  \begin{itemize}
+  \item especificar datas aproximadas de entregas dos produtos gerados em cada etapa;
+  \item estimar versões a serem lançadas.
+  \end{itemize}  
+\end{frame}
+
+\begin{frame}{Relatório de Visibilidade}
+  
+  A \insertlecture\ pode gerar um \alert{relatório de viabilidade} com 
+as seguintes características:
+
+\begin{itemize}
+\item Escrito para uma audiência geral: cliente, administradores, desenvolvedores, por exemplo;
+\item Curto o suficiente para que todos possam ler;
+\item Longo o suficiente para que nenhum detalhe importante seja omitido;
+\item Detalhes técnicos ou adicionais podem ser anexados ao final do documento.
+\end{itemize}
+
+\pause\bigskip
+
+Um relatório que não é facilmente entendido é possui pouca utilidade.
+
+\end{frame}
+
+\begin{frame}{Referência}
+  \begin{itemize}
+  \item William Y.\ Arms. CS 5150: Software Engineering, Fall 2014. \href{http://www.cs.cornell.edu/courses/cs5150/2014fa/slides/C1-feasibility.pdf}{Feasibility studies}.
+  \item \href{https://goo.gl/tpVxoD}{Feasibility study}. Wikipedia.
+  \end{itemize}
+\end{frame}

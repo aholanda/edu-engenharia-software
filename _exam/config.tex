@@ -1,0 +1,71 @@
+3) `[1,5 ponto(s)]` Vamos supor que queiramos adicionar os arquivos
+`RSA.java` e `TestRSA.java` ao repositório do controle de versão
+`git`. Liste os comandos necessários para:
+
+1. Adicionar os arquivos para o `git` controlar;
+2. Consolidar o código ou alterações efetuadas;
+3. Enviar o código ao repositório;
+4. Baixar as alterações do repositório;
+5. Verificar o estado (_status_) da cópia local do repositório;
+6. Marcar um estado do projeto de software, que pode ser por exemplo,
+   um versão lançada.
+
+
+`[1 ponto(s)]` Em um sistema de controle de versão distribuído, dois
+   desenvolvedores podem ter suas cópias locais do projeto e enviar
+   as modificações quando for conveniente para o repositório central.
+   O que acontece quando os dois desenvolvedores modificam o mesmo
+   trecho do código e o desenvolvedor A envia primeiro que o B?
+   O que deve ser feito para o desenvolvedor B adicionar suas
+   alterações sem risco de se perder?
+
+4) `[1 ponto(s)]` Quais as diferenças entre o GNU `make` e o Apache `Ant`?
+
+5) `[1 ponto(s)]` Para os fragmentos de código a seguir, complete os campos
+   `__` com os valores corretos.
+
+[source,java]
+----
+public class RSA {
+       public int totem(int p, int q) {
+       	      return (p-1)*(q-1);
+	}
+}
+
+public class TestRSA {
+       public int testTotem() {
+       	      RSA rsa = new RSA();
+	      int esperado = 12;
+	      int resultado = rsa.totem(3, __);
+
+	      assertEquals("o totem de 3 e __", esperado, resultado);
+       }
+}
+----
+
+6) `[1,5 ponto(s)]` Como o Sistema de Gerenciamento de _Bugs_ pode ser usado
+para gerenciar as tarefas de Gerenciamento de Projetos:
+
+* Planejamento;
+* Execução;
+* Monitoramento/Controle;
+* Encerramento.
+
+Responda tendo em mente um projeto de desenvolvimento de software.
+
+7) `[1 ponto(s)]` O que pode ser feito para que toda a equipe não pare quando a
+montagem ou os testes durante a integração contínua falharem?
+
+////
+
+\question{0,5}~Assinale a alternativa que possui a tarefa que {\bf não}
+faz parte do Gerenciamento de Configuração:
+
+\begin{enumerate}[a)]
+\item Controle de versão.
+\item Automação da montagem do sistema.
+\item Levantamento de requisitos.
+\item Automação dos testes e rastreio de bugs (bug-tracking).
+\item Controle do lançamento de versões.
+\end{enumerate}
+

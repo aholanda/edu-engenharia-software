@@ -1,0 +1,132 @@
+\section*{Projeto Orientado a Objetos e Modularização}
+
+\Q Um disco rígido é composto por cabeçote (2), 4 bandejas (4), eixo
+(2), carcaça (1) e motor. O motor é composto por solenoide (3), 4
+cabos (4), base (1), rolamento (2) e eixo do motor (2).  Faça um
+diagrama de classes representando estas relações. Projete um método
+nas classes que calcule o custo de cada objeto a partir dos
+componentes, se houver. O custo de cada componente está especificado
+entre parênteses. Projete o método que calcula o custo de forma que
+tenha a mesma assinatura para todas as classes.
+
+\Q Um software de áudio digital utiliza os conceitos de {\tt
+  Instrumento}, {\tt Bateria}, {\tt InstrumentoCorda}, {\tt Viola},
+{\tt Violão}, {\tt Guitarra}, {\tt InstrumentoSopro}, {\tt Saxofone},
+{\tt Flauta} e {\tt Piano}. Projete, de forma que seja
+possível o acoplamento dinâmico, o diagrama de classes destes
+conceitos a serem implementados no software. Todas as classes devem
+conter os métodos {\tt tocar} e {\tt afinar}. Faça a sobrecarga do
+método {\tt afinar} que receba como parâmetro o tom em que o
+instrumento de corda deve ser afinado.
+
+\Q Faça um protótipo do diagrama do exercício anterior em 3 linguagens
+de programação com suporte a orientação a objetos. Quando os métodos
+forem invocados, faça-os imprimir o nome da classe e assinatura. Por
+exemplo, para o método {\tt tocar} da classe {\tt Bateria}, a
+implementação em Java será:
+
+\medskip\hfil{\small\tt public void tocar() \{ System.out.println("Bateria.tocar()");\}}
+
+\Q Defina API (Interface de Programação Pública), estabeleça a relação
+com o projeto orientado a objetos e cite exemplos de sua utilização.
+
+\Q Enumere os princípios de projeto modular estabelecendo uma analogia
+e citando exemplos (sistemas operacionais, bibliotecas, linguagens de
+programação).
+
+\question{6} Desenhe os seguintes diagramas de classe UML:
+
+\begin{enumerate}[a)]
+\item As classes {\tt ContaBancaria}, {\tt Imovel} e {\tt Seguridade}
+  implementam a interface {\tt Ativo}. As classes {\tt ContaCorrente}
+  e {\tt Poupança} são especializações de {\tt ContaBancaria}. As
+  classes {\tt Acoes} e {\tt Bonus} são especializações de {\tt
+    Seguridade}.
+
+\item Uma interface {\tt IURL} possui os métodos {\tt
+    openConnection()}, {\tt parseURL()} e {\tt setURL}. A classe {\tt
+    URL} implementa {\tt IURL}, e a classe {\tt Controller}
+  especializa {\tt URL} sobrescrevendo o método {\tt openConnection()}
+  e sobrecarregando o mesmo método que recebe um parâmetro do tipo
+  {\tt Protocol}.
+
+\item A classe {\tt DispositivoMovel} é composta das classes {\tt
+    Processador}, {\tt Bateria}, {\tt Tela}, {\tt Memoria}, {\tt
+    Audio}. Há também as classes {\tt EntradaAudio} e {\tt SaidaAudio}
+  são especializações de {\tt Audio}.
+\end{enumerate}
+
+
+\question{3} Para o diagrama UML 
+
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize]
+  \begin{class}{Empresa}{0,0}
+  \end{class}
+  \begin{class}{Departamento}{-3,-2}
+    \attribute{-nome: String}
+  \end{class}
+  \begin{class}{Escritorio}{3,-2}
+    \attribute{-nomeFilial: String}
+    \attribute{\#endereco: String}
+    \attribute{+url: String}
+  \end{class}
+
+  \composition {Empresa}{}{}{Departamento}
+  \composition {Empresa}{}{}{Escritorio}
+
+  \begin{class}{EscritórioCentral}{3,-4}
+    \inherit{Escritorio}
+  \end{class}
+  \association{Departamento}{}{}{Escritorio}{}{}
+
+  \begin{class}{Pessoa}{-3,-5}
+    \attribute{-nome: String}
+    \attribute{-codigo: Integer}
+    \attribute{-endereco: String}
+    \operation{+obterNome(): String}
+    \operation{+obterCodigo(): Integer}
+    \operation{+obterContato(): Contato}
+    \operation{$\overline{\hspace{4.5cm}}$}
+  \end{class} 
+
+  \association{Departamento.south east}{}{}{Pessoa.north east}{gerente}{1}
+  \association{Departamento.south west}{}{}{Pessoa.north west}{membro}{*}
+
+    \begin{class}{Contato}{4,-8}
+      \attribute{-endereco: String}
+      \attribute{-fone: Integer[\ ]}
+    \end{class}
+    
+    \draw [umlcd style dashed line ,->] (Pessoa) --node [above, sloped, black]{} (Contato);
+
+\end{tikzpicture}
+\end{center}
+
+\noindent responda às seguintes questões:
+
+\begin{enumerate}[a)]
+\item Descreva o tipo de relacionamento entre {\tt Empresa} e {\tt Departamento},
+{\tt Empresa} e {\tt Escritório}, {\tt Departamento} e {\tt Pessoa}, {\tt Escritorio} 
+e {\tt EscritorioCentral}, {\tt Pessoa} e {\tt Contato}.
+\item Quais atributos {\tt EscritorioCentral} herda de {\tt Escritorio}?
+\item Explique as cardinalidades e descreva os papéis de {\tt membro} e {\tt gerente}.
+\item Adicione uma classe chamada {\tt Salario} que será usada pela classe {\tt Pessoa}. 
+Adicione um método na classe {\tt Pessoa} para obter o salário.
+\end{enumerate}
+
+\question{1,0} Desenhe o diagrama de classes usando UML que represente
+o código em Java listado a seguir:
+
+\begin{center}
+\begin{lstlisting}
+interface Ator {
+  void atuar();
+}
+interface Cantor {
+  void cantar();
+}
+public class AtorMusical implements Ator, Cantor
+{...}
+\end{lstlisting}
+\end{center}

@@ -1,0 +1,119 @@
+\title{Gerenciamento de Configuração}
+
+\frame{\maketitle}
+
+\begin{frame}{\inserttitle}{Definição}
+
+\inserttitle{} se refere a um conjunto de procedimentos para 
+controlar a evolução de um sistema/software. Tipicamente inclui 
+as seguintes tarefas:
+
+\begin{itemize}[<+-| alert@+>]
+\item Controle de versão;
+\item Automação da montagem do sistema;
+\item Automação dos testes e rastreio de {\em bugs} ({\em
+  bug-tracking});
+\item Controle do lançamento de versões.
+\end{itemize}
+
+\end{frame}
+
+
+\lecture{Automação de testes}{tests}
+\section{\insertlecture}
+\onlytitleframe{\insertlecture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTINUOUS INTEGRATION %%%%%%%%%%%%%%%%
+% Fontes
+% http://martinfowler.com/articles/continuousIntegration.html
+% http://www.yegor256.com/2014/10/08/continuous-integration-is-dead.html
+
+\lecture{Integação Contínua}{ci}
+\section{\insertlecture}
+\onlytitleframe{\insertlecture}
+
+\begin{frame}{\insertlecture}
+  
+  \begin{itemize}[<+->]\setbeamercovered{transparent}
+  \item Prática de desenvolvimento de software.
+  \item Membro da equipe envia suas modificações para o repositório central.
+  \item No repositório, cada envio é seguido pela montagem e testes.
+  \item O erro durante a integração exige a atenção da equipe para corrigí-lo.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{\insertlecture}{Práticas}
+
+  \begin{itemize}[<+->]\setbeamercovered{transparent}
+  \item Manter um repositório único para o projeto.
+  \item Automatizar a montagem.
+  \item Fazer com que a montagem teste a si própria.
+  \item A equipe envia as modificações para a árvore principal 
+    do controle de versão todo dia.
+  \item Os erros devem ser reparados imediatamente.
+  \item Qualquer um pode ter acesso ao executável mais recente.
+  \item Todos podem ver o que está ocorrendo com a implantação 
+    automatizada.
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{\insertlecture}{Benefícios e Riscos}
+
+  \begin{description}[<+->]\setbeamercovered{transparent}
+  \item[Benefícios] 
+    \begin{itemize}
+    \item Auxilia a identificação de {\em bugs} precocemente.
+    \item Maior confiança para a adição de funcionalidades.
+    \item Permite o acesso à versão mais atual do software.
+    \end{itemize}
+  \item[Riscos] 
+    \begin{itemize}
+    \item Se a montagem falha, a equipe para para reparar o 
+      erro, mesmo aqueles que não estão relacionados com a 
+      falha.
+    \end{itemize}
+  \end{description}
+
+\end{frame}
+
+\begin{frame}{\insertlecture}{Programas}
+
+  \begin{itemize}
+  \item \href{https://continuum.apache.org/}{Apache Continuum};
+  \item \href{http://hudson-ci.org/}{Hudson};
+  \item \href{http://cruisecontrol.sourceforge.net/}{CruiseControl};
+  \item \href{https://jenkins.io/}{Jenkins};
+  \item \href{https://www.appveyor.com/}{AppVeyor} (web).
+  \end{itemize}
+
+\end{frame}
+
+\lecture{Gerenciamento de Bugs}{bugs}
+\section{\insertlecture}
+\onlytitleframe{\insertlecture}
+
+\begin{frame}{Sistema de Gerenciamento de Bugs}
+\begin{itemize}[<+-| alert@+>]
+\item O {\bf Sistema de Gerenciamento de {\em Bugs}} ({\em Bug Tracking System})  é uma aplicação que centraliza o relato, análise e solução de {\em bugs} encontrados no software desenvolvido ou em desenvolvimento.
+\item É interessante que o gerenciamento de {\em bugs} esteja vinculado à 
+ferramenta onde é feito o gerenciamento do projeto, para vinculação com 
+código fonte, cronograma, documentação e outros objetos que auxiliam no 
+desenvolvimento e manutenção do software.
+\item Deve possuir sistema de notificações por email, autenticação, 
+ sistema de permissões, segurança e confidencialidade.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Algumas Implementações}{Sistema de Gerenciamento de Bugs}
+
+\begin{itemize}
+\item \href{https://www.bugzilla.org/}{Bugzilla}
+\item \href{https://www.atlassian.com/software/jira}{JIRA}
+\item \href{https://www.mantisbt.org/}{Mantis}
+\item \href{http://www.redmine.org/}{Redmine}
+\item \href{http://trac.edgewall.org/}{Trac}
+\end{itemize}
+
+\end{frame}

@@ -1,0 +1,301 @@
+\lecturetitle{\em Refactoring, cont.}{\course}
+
+\frame{\maketitle}
+
+\lstset{language=java,basicstyle=\scriptsize,commentstyle=\tiny\color{gray}}
+
+% \begin{frame}{\em Refactoring}
+% \begin{itemize}[<+- | alert@+>]\setbeamercovered{transparent}
+% \item {\em Refactoring} é o processo de reescrever material escrito para
+%     aperfeiçoar sua legibilidade ou estrutura sem o propósito explícito de
+%     alterar seu significado ou comportamento.
+%   \item Teve maior divulgação com o livro ``Refactoring: Improving the
+%     Design of Existing Code'' (ISBN 0-201-48567-2) de Martin Fowler, e de
+%     devido a sua associação às Metodologias Ágeis, principalmente
+%     \emph{Extreme Programming}.
+%   \end{itemize}
+% \end{frame}
+
+% \ifnum1=2
+
+% \begin{frame}{\em Encapsulate Field}
+
+%   \begin{columns}
+%     \begin{column}{.5\textwidth}
+%       \begin{block}{Antes}
+%         \onslide<1>{\color{gray}}
+%         \begin{center}
+%           \begin{tikzpicture}
+%             \begin{class}[text width=8cm]{ Pessoa }{0 ,0}
+%               \attribute {+ nome : String}
+%             \end{class}
+%           \end{tikzpicture}
+%         \end{center}
+%       \end{block}
+%     \end{column}
+
+%     \begin{column}{.5\textwidth}
+%       \begin{block}{Antes}
+%         \begin{center}
+%           \begin{tikzpicture}
+%             \begin{class}[text width=8cm]{ Pessoa }{0 ,0}
+%               \attribute{- nome : String}
+
+%               \operation{+ getNome() : String}
+%               \operation{+ setNome(nome : String)}
+%             \end{class}
+%           \end {tikzpicture}
+%         \end{center}
+%       \end{block}
+%     \end{column}
+%   \end{columns}
+
+% \end{frame}
+
+
+% \begin{frame}{\em Extract Class}\footnotesize
+% \begingroup
+%     \onslide<1>{\color{gray}}
+%     \begin{center}
+%   \begin{tikzpicture}
+%     \begin{class}[text width=6cm]{Pessoa}{0 ,0}
+%       \attribute {- nome : String}
+%       \attribute {- noFone : String}
+%     \end{class}
+%   \end{tikzpicture}
+% \end{center}
+% \endgroup
+
+% \pause\bigskip
+
+%     \begin{center}
+%     \begin{tikzpicture}
+%       \begin{class}[text width=4cm]{Pessoa}{-3 ,-.5}
+%         \attribute{- nome : String}
+%     \end{class}
+
+%     \begin{class}[text width=4cm]{Telefone}{3,0}
+%       \attribute{- DDD : String}
+%       \attribute{- no : String}
+%       \attribute{- ramal : String}
+%     \end{class}
+%     \unidirectionalAssociation{Pessoa}{possui}{0..*}{Telefone}
+%   \end {tikzpicture}
+% \end{center}
+
+% \end{frame}
+
+% \fi
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FIELD/METHOD
+
+ \begin{frame}{\em Push Down Field/Method}\small
+   \label{Upushdownlabel}
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{class}[text width=4cm]{Funcionario}{0,2.5}
+        \attribute{- comissao : float}
+        \operation{+ getComissao() : float}
+      \end{class}
+      \begin{class}[text width=3cm]{Vendedor}{-3,0}
+        \inherit{Funcionario}
+      \end{class}
+      \begin{class}[text width=3cm]{Engenheiro}{3,0}
+        \inherit{Funcionario}
+      \end{class}
+    \end{tikzpicture}
+  \end{center}
+
+  \vfill Inverso: {\em Push Up Field/Method}, slide~\ref{Upushuplabel}.
+\end{frame}
+
+\begin{frame}[fragile]{\em Push Down Field/Method}{\alert{\em refactoring}}\small
+  \label{pushdownlabelU}
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{class}[text width=3cm]{Funcionario}{0,2.5}
+      \end{class}
+      \begin{class}[text width=4cm]{Vendedor}{-3,0}
+        \inherit{Funcionario}
+        \attribute{- comissao : float}
+        \operation{+ getComissao() : float}
+      \end{class}
+      \begin{class}[text width=3cm]{Engenheiro}{3,0}
+        \inherit{Funcionario}
+      \end{class}
+    \end{tikzpicture}
+  \end{center}
+    \vfill Inverso: {\em Push Up Field/Method}, slide~\ref{pushuplabelU}.
+\end{frame}
+
+
+\begin{frame}{\em Push Up Field/Method}\small
+  \label{Upushuplabel}
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{class}[text width=3cm]{Funcionario}{0,2}
+      \end{class}
+      \begin{class}[text width=4cm]{Vendedor}{-3,0}
+        \attribute{- nome : String}
+        \operation{+ getNome() : String}
+        \inherit{Funcionario}
+      \end{class}
+      \begin{class}[text width=4cm]{Engenheiro}{3,0}
+        \attribute{- nome : String}
+        \operation{+ getNome() : String}
+        \inherit{Funcionario}
+      \end{class}
+    \end{tikzpicture}
+  \end{center}
+
+  \vfill Inverso: {\em Push Down Field/Method}, slide~\ref{Upushdownlabel}.
+\end{frame}
+
+\begin{frame}{\em Push Up Field/Method}{\alert{\em refactoring}}\small
+  \label{pushuplabelU}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{class}[text width=4cm]{Funcionario}{0,2.5}
+        \attribute{\#  nome : String}
+        \operation{+ getNome() : String}
+      \end{class}
+      \begin{class}[text width=3cm]{Vendedor}{-3,0}
+        \inherit{Funcionario}
+      \end{class}
+      \begin{class}[text width=3cm]{Engenheiro}{3,0}
+        \inherit{Funcionario}
+      \end{class}
+    \end{tikzpicture}
+  \end{center}
+
+    \vfill Inverso: {\em Push Down Field/Method}, slide~\ref{pushdownlabelU}.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DLEIF
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% METHOD BODY
+
+\begin{frame}[fragile]{\em Replace Temp with Query}
+ \begin{lstlisting}[language=java]
+public class _Produto {
+        private int quantidade;
+        private double precoItem;
+
+        public double calcularPrecoTotal() {
+                double precoBase = this.quantidade * this.precoItem;
+                if (precoBase > 1000) {
+                        return precoBase * 0.95;
+                } else {
+                        return precoBase * 0.98;
+                }
+        }
+}
+  \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{\em Replace Temp with Query}{\em\color{red}refactoring}
+\color{red}
+  \begin{lstlisting}[language=java]
+public class Produto_ {
+        private int quantidade;
+        private double precoItem;
+
+        public double calcularPrecoTotal() {
+                if (this.precoBase() > 1000) {
+                        return this.precoBase() * 0.95;
+                } else {
+                        return this.precoBase() * 0.98;
+                }
+        }
+
+        private double precoBase() {
+                return this.quantidade*this.precoItem;
+        }
+}
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\em Move Method}\footnotesize
+
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+      \begin{block}<1->{Antes}\bigskip
+        \begin{tikzpicture}
+          \begin{class}[text width=4.6cm]{Projeto}{0 ,0}
+            \attribute{- participantes: Pessoa[]}
+          \end{class}
+
+          \begin{class}[text width=4.6cm]{Pessoa}{0,-2}
+            \attribute{- id : int}
+            \operation{+ participa(p: Projeto) : boolean}
+          \end{class}
+          %\unidirectionalAssociation{Pessoa}{possui}{0..*}{Telefone}
+        \end {tikzpicture}
+      \end{block}
+    \end{column}
+    
+    \begin{column}{.5\textwidth}
+      \begin{block}<2>{Depois}\bigskip
+        \begin{tikzpicture}
+          \begin{class}[text width=4.6cm]{Projeto}{0,0}
+            \attribute{- participantes: Pessoa[]}
+            \operation{+ participa(p: Pessoa) : boolean}
+          \end{class}
+          
+          \begin{class}[text width=4.6cm]{Pessoa}{0,-2.5}
+            \attribute{- id : int}
+          \end{class}
+          %\unidirectionalAssociation{Pessoa}{possui}{0..*}{Telefone}
+        \end {tikzpicture}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{\em Extract Method}
+\begin{lstlisting}[language=java]
+  public float calcularSalario(float salario, int numAnos) {
+    int adicional;
+    // Calcular o adicional por anos trabalhados,
+    // 1) a cada 5 anos +5% sobre o salario;
+    // 2) e a cada 20 anos +8% sobre o salario.
+    adicional = 5 * (numAnos / 5);
+    adicional += 8 * (numAnos/20);
+
+    return salario + salario * ((float)adicional/100);
+  }
+\end{lstlisting}
+
+\pause
+
+\begin{lstlisting}[basicstyle=\tiny\color{red}]
+  public float calcularSalario(float salario, int numAnos) {
+    int adicional = calcularAdicional(numAnos);
+    
+    return salario + salario * ((float)adicional/100);
+   }
+   // Calcula o adicional por anos trabalhados,
+   // 1) a cada 5 anos +5% sobre o salario;
+   // 2) e a cada 20 anos +8% sobre o salario.
+public int calcularAdicional(int numAnos) {
+    int adicional = 5 * (numAnos / 5);
+    adicional += 8 * (numAnos/20);
+    
+    return adicional;
+  }
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Exercício}
+  \begin{enumerate}
+  \item Implementar o exemplo \emph{Extract Method} em Java.
+  \end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END OF METHOD BODY

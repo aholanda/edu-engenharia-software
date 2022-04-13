@@ -1,0 +1,162 @@
+:sectnums:
+
+== Gerenciamento de Configuração
+
+=== Automação de Montagem
+
+As ferramentas de automação auxiliam nos processos de construção do
+software, através da utilização de regras pré-definidas ou definidas
+pelo usuário para as fases de compilação, testes, implantação e até
+mesmo execução.
+
+==== `make`
+
+Uma ferramenta muito utilizada, principalmente em projetos de código
+escritos em C/C++ é o programa
+https://www.gnu.org/software/make/[`make`]. A seguir é mostrado um exemplo
+de arquivo chamado {githubLnk}/_practice/src/Makefile[Makefile], onde
+são definidas as regras:
+
+[source,make,linenums]
+----
+include::src/Makefile[]
+----
+
+O programa chamado `teste` depende dos arquivos objetos `teste.o`,
+`fatorial.o` e `media.o`, que são gerados a partir dos arquivos fontes
+{githubLnk}/_pratice/src/teste.c[teste.c],
+{githubLnk}/_pratice/src/fatorial.c[fatorial.c] e
+{githubLnk}/_pratice//src/media.c[media.c], respectivamente.
+Porém, podemos notar que a regra para a geração do arquivos objetos
+não foi especificada, pois o `make` implicitamente, procura os
+arquivos fontes com base nos nomes dos arquivos objetos e executa a
+compilação.
+
+Outro aspecto a ser notado é que se compilarmos o `teste` uma vez, ele
+só será recompilado se houver alteração em qualquer dos arquivos
+fontes dos quais ele depende. A regra `clean` não se refere a nenhum
+arquivo e é usada quando queremos apagar os arquivos gerados e que não
+são mais necessários.
+
+Para executarmos o `make` e compilarmos o programa `teste` basta digitarmos
+
+[source,sh]
+----
+$ make teste
+----
+
+onde `make` é o programa a ser executado e `teste` a regra que
+queremos que seja seguida. Ou podemos simplesmente digitar
+
+[source,sh]
+----
+$ make
+----
+
+que produz o mesmo efeito, pois a primeira regra é executada, que é a
+regra de compilação do programa `teste`.
+
+==== Apache Ant
+
+O http://ant.apache.org/[Apache Ant] é bastante utilizado,
+principalmente em projetos desenvolvidos usando a liguagem de
+programação Java. O princípio é parecido com o do `make`, ou seja,
+gerenciar regras, que são chamadas de tarefas, e dependências entre
+elas, porém usando usando o formato XML para a escrita das regras. A
+seguir um exemplo de arquivo de configuração, que por padrão, o Ant
+carrega o arquivo chamado
+`build.xml`:
+
+[source,xml,linenums]
+----
+include::../TDD/build.xml[]
+----
+
+A tarefa `compile` efetua a compilação do código Java no diretório em
+ que o `ant` estiver executando e escreve o resultado da compilação no
+ mesmo diretório. Além de `compile`, há as tarefas `test` para testar
+ a classe `Calculadora` e `clean` para apagar os arquivos gerados ou
+ baixados automaticamente usando o alvo `get` do Ant. Para compilar
+ os códigos, executamos:
+
+[source,sh]
+----
+$ ant compile
+----
+
+==== Alternativas
+
+Além do `make` e `ant`, os seguintes programas podem ser usados com a mesma
+função:
+
+* https://cmake.org/[CMake];
+* http://www.scons.org/[SCons];
+* https://embedthis.com/makeme/[MakeMe].
+
+
+=== Automação de Testes
+
+Em metodologias ágeis, como a _Extreme_ _Programming_, os testes são
+importantes não somente para verificar se alterações no código
+resultaram em erro, mas também, para ampliar o entendimento sobre os
+requisitos.
+
+==== JUnit
+
+Há bibliotecas especialmente implementadas para incoporar o código
+de testes, interferindo o mínimo possível no projeto. Para a linguagem
+Java, o principal pacote é o http://junit.org/junit4/[JUnit]. Utilizaremos
+o código {githubLnk}/TDD/Calculadora.java[Calculadora.java],
+listado a seguir, como base para os testes:
+
+[source,java,linenums]
+----
+include::../TDD/Calculadora.java[]
+----
+
+O arquivo
+{githubLnk}/TDD/TesteCalculadora.java[TesteCalculadora.java]
+contém o código, usando o JUnit, para o teste dos métodos
+implementados na classe `Calculadora`. O arquivo é listado a seguir:
+
+[source,java,linenums]
+----
+include::../TDD/TesteCalculadora.java[]
+----
+
+A anotação `@Teste` especifica quais métodos devem ser executados para
+a realização dos testes. Para executar o JUnit, precisaremos de dois pacotes:
+
+* http://search.maven.org/remotecontent?filepath=junit/junit/4.12/junit-4.12.jar[junit.jar]
+* http://search.maven.org/remotecontent?filepath=org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar[hamcrest-core.jar]
+
+Para compilar, executamos
+
+[source,sh]
+----
+javac -cp .:junit-4.12.jar TesteCalculadora.java Calculadora.java
+----
+
+e para executar o teste
+
+[source,sh]
+----
+java -cp .:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore TesteCalculadora
+----
+
+Como já havíamos especificado o teste como uma tarefa no `build.xml`, basta executarmos
+
+[source,sh]
+----
+$ ant test
+----
+
+para compilarmos os programas, pois o teste depende da compilação, e
+executarmos o teste com a saída informando o resultado.
+
+==== Alternativas
+
+Além do JUnit, outros _frameworks_ com a mesma função podem ser usados, tais como:
+
+* http://testng.org/doc/index.html[TestNG];
+* http://www.nunit.org/[NUnit], para programas em C#.

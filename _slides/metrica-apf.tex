@@ -1,0 +1,170 @@
+
+\begin{frame}{Pontos de Função}
+  A Análise de Pontos de Função (APF) é uma métrica elaborada por
+  Allan Albrecht da IBM,
+  \href{http://fattocs.com/files/pt/artigos/MedindoaProdutividadedoDesenvolvimentodeAplicativos.pdf}{publicada}
+  em 1979.\pause\bigskip
+
+  O padrão reconhecido pela indústria de software para APF é o Manual
+  de Práticas de Contagem de Pontos de Função (CPM - Counting
+  Practices Manual) mantido pelo IFPUG ({\em International Function
+    Point Users Group}).
+
+\end{frame}
+
+\begin{frame}{Funções de Dados}{Pontos de Função}
+  \small
+  \begin{description}[<+->]\setbeamercovered{transparent}
+  \item[Arquivos Lógicos Internos (ALI):] {\em Internal Logic File (ILF)}
+    \begin{itemize}
+    \item Entidade lógica e persistente;
+    \item Mantida dentro da fronteira da aplicação;
+    \item Equivalente ao repositório de dados.
+    \end{itemize}
+
+  \item[Arquivos de Interface Externa (AIE):] {\em External Interface File (EIF)}
+    \begin{itemize}
+    \item Entidade lógica e persistente;
+    \item Mantida dentro da fronteira de outra aplicação;
+    \item Equivalente a um {\em WebService}, RPC, CORBA.
+    \end{itemize}
+  \end{description}
+\end{frame}
+
+
+\begin{frame}{Funções de Transações}\small
+\begin{description}[<+->]\setbeamercovered{transparent}
+  \item[Entrada Externa (EE):] {\em External Input (EI)}
+    \begin{itemize}
+    \item Processo lógico do negócio que mantem os dados;
+    \item Contada com base no número de campos de dados.
+    \end{itemize}
+
+  \item[Saída Externa (SE):] {\em External Output (EO)}
+    \begin{itemize}
+    \item Processo lógico do negócio que gera dados;
+    \item Exemplos: Relatórios, emails de resposta.
+    \end{itemize}
+
+  \item[Consulta Externa (CE):] {\em External Query (EQ)}
+    \begin{itemize}
+    \item Processamento sem alteração de estado.
+    \end{itemize}
+  \end{description}
+\end{frame}
+
+\begin{frame}{Complexidade}\footnotesize
+
+  \begin{itemize}[<+->]\setbeamercovered{transparent}
+  \item ALI, AIE\\
+    \begin{center}
+    \begin{tabular}[ht]{|c|c|c|c|}\hline
+      & \bf <  20 & \bf 20--50 &\bf  >50 \\\hline
+      1 & Baixa & Baixa & Média \\
+      2--5 & Baixa &  Média & Alta \\
+      >5 & Média & Alta & Alta \\\hline
+    \end{tabular}
+  \end{center}
+  
+  \item EE\\
+    \begin{center}
+    \begin{tabular}[ht]{|c|c|c|c|}\hline
+      & \bf <  5 & \bf 5--15 &\bf  >15 \\\hline
+      <2 & Baixa & Baixa & Média \\
+      2 & Baixa &  Média & Alta \\
+      >2 & Média & Alta & Alta \\\hline
+    \end{tabular}
+  \end{center}
+
+\item SE, CE\\
+    \begin{center}
+    \begin{tabular}[ht]{|c|c|c|c|}\hline
+      & \bf <  6 & \bf 6--19 &\bf  >19 \\\hline
+      <2 & Baixa & Baixa & Média \\
+      2--3 & Baixa &  Média & Alta \\
+      >3 & Média & Alta & Alta \\\hline
+    \end{tabular}
+  \end{center}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Pesos}
+  
+  A contribuição de cada complexidade é extraída da tabela a seguir:
+
+  \begin{center}
+    \begin{tabular}[ht]{|c|c|c|c|}\hline
+      \bf Tipo & \bf Baixa & \bf Média & \bf Alta \\\hline
+      ALI & 7 & 10 & 15 \\
+      AIE & 5 & 7 & 10 \\
+      EE & 3 & 4 & 6 \\
+      SE & 4 & 5 & 7 \\
+      CE & 3 & 4 & 6 \\\hline
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Fator de Ajuste do Valor}\scriptsize
+  
+  \begin{columns}
+    \begin{column}{.3\textwidth}
+      Níveis de Influência
+      \smallskip
+      \begin{tabular}[ht]{|c|c|}\hline
+        \bf Valor & Influência \\\hline
+        0 & Nenhuma \\
+        1 & Mínima \\
+        2 & Moderada \\
+        3 & Média \\
+        4 & Significativa \\
+        5 & Forte \\\hline
+      \end{tabular}
+    \end{column}
+    \begin{column}{.7\textwidth}
+      \begin{tabular}[ht]{l|l}\hline\hline
+        \bf \hfil Características  & \bf\hfil  Nível  de\\
+        \bf \hfil Gerais & \bf \hfil Influência \\\hline
+        1. Comunicação de Dados & \\
+        2. Processamento Distribuído de Dados & \\
+        3. Desempenho & \\
+        4. Configuração Intensamente Utilizada& \\
+        5. Taxa de Transação& \\
+        6. Entrada de Dados On-Line& \\
+        7. Eficiência do Usuário Final& \\
+        8. Atualização On-Line& \\
+        9. Processamento Complexo& \\
+        10. Reutilização& \\
+        11. Facilidade de Instalação& \\
+        12. Facilidade de Operação& \\
+        13. Múltiplas Localidades& \\
+        14. Facilidade de Alteração& \\\hline
+        \bf TOTAL & \\\hline\hline
+      \end{tabular}
+    \end{column}
+  \end{columns}
+
+  \begin{center}
+    Fator de Ajuste  = Nível de Influência Total * 0,01 + 0,65
+  \end{center}
+\end{frame}
+
+\begin{frame}{Ponto de Função Ajustado}
+  
+  \begin{center}
+    Ponto de Função Ajustado = Ponto de Função não Ajustado * Fator de Ajuste
+  \end{center}
+\end{frame}
+
+\begin{frame}{Referências}
+  \begin{itemize}
+  \item
+    \href{http://www.slideshare.net/alvarofpinheiro/medida-de-esforo-de-software-com-anlise-de-ponto-de-funo}{Medida
+      de Esforço de Software com Análise de Ponto de Função}.  Álvaro
+    Farias Pinheiro. [slides]
+  \item
+    \href{http://www.bfpug.com.br/Artigos/Dekkers-PontosDeFuncaoEMedidas.htm}{Pontos
+      de Função e Medidas. O que é um Ponto de Função?} Carol
+    A. Dekkers, Quality Plus Technologies, Inc.
+  \end{itemize}
+  
+\end{frame}

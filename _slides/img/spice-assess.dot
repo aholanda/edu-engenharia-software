@@ -1,0 +1,14 @@
+digraph SPICE {
+	size ="4,4";
+	node [shape=box,style=filled,color=".7 .3 1.0"];
+	processo;
+	avaliação;
+	pontuação;
+	aperfeiçoamento;
+	processo -> avaliação;
+	avaliação -> pontuação;
+	avaliação -> aperfeiçoamento;
+	aperfeiçoamento -> processo;
+	pontuação -> aperfeiçoamento [style="dotted"];
+}
+	
